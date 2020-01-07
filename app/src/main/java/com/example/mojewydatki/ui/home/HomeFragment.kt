@@ -14,27 +14,22 @@ import com.example.mojewydatki.MainActivity
 import com.example.mojewydatki.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment() {
 
-//    private lateinit var homeViewModel: HomeViewModel
+class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        homeViewModel =
-//                ViewModelProviders.of(this).get(HomeViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_home)
-        val recyclerView: RecyclerView = root.findViewById(R.id.recyclerview)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = HomeAdapter()
-        /*
-        homeViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        */
+        val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        recyclerView.adapter =HomeAdapter()
+        val dbH = PayDataBase (applicationContext)
+        val db = dbH.writableDatabase
+
         return root
     }
 }
