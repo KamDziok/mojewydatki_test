@@ -24,12 +24,13 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
-        recyclerView.layoutManager=LinearLayoutManager(activity)
-        recyclerView.adapter =HomeAdapter()
-        val dbH = PayDataBase (applicationContext)
+
+        val dbH = PayDataBase (activity!!.applicationContext)
         val db = dbH.writableDatabase
 
+        val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        recyclerView.adapter =HomeAdapter(db)
         return root
     }
 }

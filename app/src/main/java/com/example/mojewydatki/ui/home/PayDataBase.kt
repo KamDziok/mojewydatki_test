@@ -19,7 +19,7 @@ object TworzenieTabeliWydatek {
 
     const val SQL_CREATE_TABLE: String =
         "CREATE TABLE ${PayBase.TABLE_NAME} (" +
-                "${BaseColumns._ID} INTEGER PRIMARY KEY" +
+                "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                 "${PayBase.payTitle} TEXT NOT NULL," +
                 "${PayBase.payCategory} TEXT NOT NULL," +
                 "${PayBase.payDate} TEXT NOT NULL," +

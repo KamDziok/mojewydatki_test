@@ -16,6 +16,7 @@ import android.view.Menu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.ui.home.HomeAdapter
+import com.example.mojewydatki.ui.home.PayDataBase
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -57,6 +58,8 @@ class MainActivity : AppCompatActivity() {
         //recyclerview.layoutManager = LinearLayoutManager(this)
 
         //recyclerview.adapter = HomeAdapter()
+
+
 
     }
 
