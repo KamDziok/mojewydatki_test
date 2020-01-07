@@ -22,10 +22,10 @@ class WydatekFragment : Fragment() {
         wydatekViewModel =
                 ViewModelProviders.of(this).get(WydatekViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
-        val textView: TextView = root.findViewById(R.id.text_wydatek)
-        wydatekViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+       // val textView: TextView = root.findViewById(R.id.text_wydatek)
+      //  wydatekViewModel.text.observe(this, Observer {
+       //     textView.text = it
+      //  })
         return root
     }
 }
