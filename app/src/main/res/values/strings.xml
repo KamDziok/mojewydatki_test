@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Moje Wydatki</string>
+    <string name="navigation_drawer_open">Otwarta szuflada nawigacji</string>
+    <string name="navigation_drawer_close">Zamknięta szuflada nawigacji</string>
+    <string name="text_home">Moje wydatki</string>
+    <string name="menu_home">Moje wydatki</string>
+    <string name="menu_przeglad">Przegląd</string>
+    <string name="menu_wydatek">Dodaj wydatek</string>
+    <string name="menu_konto">Konto</string>
+    <string name="menu_kategorie">Kategorie</string>
+    <string name="menu_podsumowanie">Podsumowanie</string>
+</resources>

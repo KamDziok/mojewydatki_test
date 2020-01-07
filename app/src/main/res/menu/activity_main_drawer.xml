@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_wydatek"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_przeglad"
+            android:icon="@drawable/ic_menu_przeglad"
+            android:title="@string/menu_przeglad" />
+        <item
+            android:id="@+id/nav_podsumowanie"
+            android:icon="@drawable/ic_menu_podsumowanie"
+            android:title="@string/menu_podsumowanie" />
+        <item
+            android:id="@+id/nav_kategorie"
+            android:icon="@drawable/ic_menu_kategorie"
+            android:title="@string/menu_kategorie" />
+        <item
+            android:id="@+id/nav_wydatek"
+            android:icon="@drawable/ic_menu_plus"
+            android:title="@string/menu_wydatek" />
+
+    </group>
+
+    <item android:title="Konta">
+        <menu>
+
+            <item
+                android:title="Portfel                                          100.02 zł" />
+            <item
+                android:title="mBank                                        4535.30 zł" />
+        </menu>
+    </item>
+
+</menu>
