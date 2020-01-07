@@ -9,4 +9,13 @@
     <string name="menu_konto">Konto</string>
     <string name="menu_kategorie">Kategorie</string>
     <string name="menu_podsumowanie">Podsumowanie</string>
+    <string name="dodaj_wydatek_kwota">Kwota</string>
+    <string name="dodaj_wydatek_wplyw">Wpływ</string>
+    <string name="dodaj_wydatek_wydatek">Wydatek</string>
+    <string name="dodaj_wydatek_data">Data</string>
+    <string name="dodaj_wydatek_notatka">Notatka</string>
+    <string name="dodaj_wydatek_konto">Konto</string>
+    <string name="dodaj_wydatek_zdjecie">Zdjęcie paragonu</string>
+    <string name="dodaj_wydatek_tytul">Tytuł</string>
+    <string name="dodaj_wydatek_kategoria">Kategoria</string>
 </resources>
