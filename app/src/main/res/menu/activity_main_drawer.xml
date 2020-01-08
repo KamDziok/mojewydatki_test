@@ -25,6 +25,11 @@
             android:id="@+id/nav_wydatek"
             android:icon="@drawable/ic_menu_plus"
             android:title="@string/menu_wydatek" />
+        <item
+            android:id="@+id/nav_konto"
+            android:icon="@drawable/ic_menu_plus"
+            android:title="@string/menu_konto" />
+
 
     </group>
 

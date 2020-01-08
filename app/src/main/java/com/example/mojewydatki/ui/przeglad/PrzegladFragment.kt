@@ -22,10 +22,7 @@ class PrzegladFragment : Fragment() {
         przegladViewModel =
                 ViewModelProviders.of(this).get(PrzegladViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_przeglad, container, false)
-        val textView: TextView = root.findViewById(R.id.text_przeglad)
-        przegladViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
         return root
     }
 }

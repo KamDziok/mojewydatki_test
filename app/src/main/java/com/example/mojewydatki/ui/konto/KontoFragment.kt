@@ -22,10 +22,11 @@ class KontoFragment : Fragment() {
         kontoViewModel =
                 ViewModelProviders.of(this).get(KontoViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_konto, container, false)
-        val textView: TextView = root.findViewById(R.id.text_konto)
-        kontoViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+     //   val textView: TextView = root.findViewById(R.id.text_konto)
+     //   kontoViewModel.text.observe(this, Observer {
+     //       textView.text = it
+     //   }
+        //)
         return root
     }
 }

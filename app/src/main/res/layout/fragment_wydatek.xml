@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/payTitle_textedit"
+            android:id="@+id/categoryTitle_textedit"
             android:layout_width="274dp"
             android:layout_height="38dp"
             android:layout_marginTop="14dp"
@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/payValue_textView"
+            android:id="@+id/konto_saldop_textView"
             android:layout_width="77dp"
             android:layout_height="27dp"
             android:layout_marginStart="30dp"
@@ -32,11 +32,11 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payTitle_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textView" />
 
 
         <EditText
-            android:id="@+id/payValue_textedit"
+            android:id="@+id/konto_saldop_textedit"
             android:layout_width="60dp"
             android:layout_height="38dp"
             android:layout_marginTop="37dp"
@@ -47,10 +47,10 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/payCategory_textedit"
             app:layout_constraintEnd_toStartOf="@+id/radioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/payTitle_textedit" />
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit" />
 
         <TextView
-            android:id="@+id/payTitle_textView"
+            android:id="@+id/categoryTitle_textView"
             android:layout_width="77dp"
             android:layout_height="27dp"
             android:layout_marginStart="30dp"
@@ -70,7 +70,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payTitle_textedit">
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit">
 
             <RadioButton
                 android:id="@+id/radioButton_wplyw"
@@ -96,7 +96,7 @@
             android:inputType="text"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payValue_textedit" />
+            app:layout_constraintTop_toBottomOf="@+id/konto_saldop_textedit" />
 
         <TextView
             android:id="@+id/payCategory_textView"
@@ -108,7 +108,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payValue_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/konto_saldop_textView" />
 
         <TextView
             android:id="@+id/payDate_textView"
@@ -130,6 +130,8 @@
             android:layout_marginEnd="192dp"
             android:ems="10"
             android:inputType="date"
+
+
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/payCategory_textedit" />
@@ -206,13 +208,13 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic[8]" />
 
         <Button
-            android:id="@+id/dodaj_wydatek_button"
+            android:id="@+id/dodaj_konto_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="14dp"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/dodaj_wydatek_dodaj"
+            android:text="@string/dodaj"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -223,9 +225,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="14dp"
-            android:text="@string/dodaj_wydatek_anuluj"
+            android:text="@string/anuluj"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dodaj_wydatek_button" />
+            app:layout_constraintEnd_toStartOf="@+id/dodaj_konto_button" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

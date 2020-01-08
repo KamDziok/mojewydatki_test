@@ -1,5 +1,6 @@
 package com.example.mojewydatki
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,8 @@ import com.example.mojewydatki.ui.home.HomeAdapter
 import com.example.mojewydatki.ui.home.PayDataBase
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_wydatek.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+
+
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)

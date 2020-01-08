@@ -21,11 +21,15 @@ class KategorieFragment : Fragment() {
     ): View? {
         kategorieViewModel =
                 ViewModelProviders.of(this).get(KategorieViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_kategorie, container, false)
+
+        val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
+        /*
         val textView: TextView = root.findViewById(R.id.text_kategorie)
         kategorieViewModel.text.observe(this, Observer {
             textView.text = it
         })
+
+      */
         return root
     }
 }

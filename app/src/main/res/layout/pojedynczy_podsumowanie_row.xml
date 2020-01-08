@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pojedynczepodsumownie"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="144dp">
+
+        <TextView
+            android:id="@+id/nazwa_kategorii_poj"
+            android:layout_width="58dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/dodaj_wydatek_data"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/podsumowanie_wydatki_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/podsumowanie_wydatki"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nazwa_kategorii_poj" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="13dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/podsumowanie_wydatki_view"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/podsumowanie_wydatki"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="49dp"
+            android:text="TextView"
+            android:textColor="#D50000"
+            app:layout_constraintStart_toEndOf="@+id/podsumowanie_wydatki_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/podsumowanie_wplywy_view"
+            android:layout_width="61dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/podusmowanie_wplywy"
+            app:layout_constraintEnd_toStartOf="@+id/podsumowanie_wplywy"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/podsumowanie_wplywy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:layout_marginEnd="30dp"
+            android:text="TextView"
+            android:textColor="#00C853"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/podsumowanie_bilans_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/podsumowanie_bilans"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/podsumowanie_wydatki_view" />
+
+        <TextView
+            android:id="@+id/podsumowanie_bilans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="14dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/podsumowanie_bilans_view"
+            app:layout_constraintTop_toBottomOf="@+id/podsumowanie_wydatki" />
+
+        <TextView
+            android:id="@+id/podsumowanie_najwiecej_wydatkow_w_kategorii"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:text="@string/podsumowanie_nw"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/podsumowanie_bilans_view" />
+
+        <TextView
+            android:id="@+id/podsumowanie_kategoria_max_wydatki"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="14dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
