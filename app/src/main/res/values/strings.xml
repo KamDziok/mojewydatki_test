@@ -18,4 +18,6 @@
     <string name="dodaj_wydatek_zdjecie">Zdjęcie paragonu</string>
     <string name="dodaj_wydatek_tytul">Tytuł</string>
     <string name="dodaj_wydatek_kategoria">Kategoria</string>
+    <string name="dodaj_wydatek_dodaj">Dodaj</string>
+    <string name="dodaj_wydatek_anuluj">Anuluj</string>
 </resources>
