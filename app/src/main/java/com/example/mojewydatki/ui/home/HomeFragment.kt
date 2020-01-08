@@ -1,5 +1,6 @@
 package com.example.mojewydatki.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.MainActivity
 import com.example.mojewydatki.R
+import com.example.mojewydatki.ui.wydatek.WydatekFragment
+import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +35,12 @@ class HomeFragment : Fragment() {
         val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
         recyclerView.layoutManager=LinearLayoutManager(activity)
         recyclerView.adapter =HomeAdapter(db)
+
+        val fragment_wydatek = WydatekFragment()
+        root.findViewById<View>(R.id.fab).setOnClickListener() {
+            childFragmentManager.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
+            root.findViewById<View>(R.id.fab).visibility = View.INVISIBLE
+        }
         return root
     }
 }

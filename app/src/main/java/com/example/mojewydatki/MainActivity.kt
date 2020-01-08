@@ -33,13 +33,13 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        val fm = supportFragmentManager
-        val fragment_wydatek = WydatekFragment()
-        fab.setOnClickListener {
-            fm.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
-
-        }
+        //val fab: FloatingActionButton = findViewById(R.id.fab)
+        //val fm = supportFragmentManager
+        //val fragment_wydatek = WydatekFragment()
+//        fab.setOnClickListener {
+//            fm.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
+//
+//        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
 
