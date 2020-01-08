@@ -12,7 +12,7 @@
         android:layout_height="144dp">
 
         <TextView
-            android:id="@+id/data_podsumowanie"
+            android:id="@+id/nazwa_kategorii_poj"
             android:layout_width="58dp"
             android:layout_height="21dp"
             android:layout_marginStart="30dp"
@@ -30,7 +30,7 @@
             android:layout_marginTop="14dp"
             android:text="@string/podsumowanie_wydatki"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/data_podsumowanie" />
+            app:layout_constraintTop_toBottomOf="@+id/nazwa_kategorii_poj" />
 
         <View
             android:id="@+id/divider"

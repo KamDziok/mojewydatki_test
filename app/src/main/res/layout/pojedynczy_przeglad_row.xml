@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pojedynczekonto"
+    android:id="@+id/pojedynczyprzeglad"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -13,12 +13,12 @@
 
         <TextView
             android:id="@+id/nazwa_kategorii_poj"
-            android:layout_width="88dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="14dp"
-            android:text="@string/konto"
+            android:text="@string/kategorie_nazwa_kategorii"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="14dp"
-            android:text="@string/saldo_konta"
+            android:text="kwota na + lub na -"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
