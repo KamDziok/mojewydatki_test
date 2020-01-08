@@ -22,10 +22,7 @@ class PodsumowanieFragment : Fragment() {
         podsumowanieViewModel =
                 ViewModelProviders.of(this).get(PodsumowanieViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_podsumowanie, container, false)
-        val textView: TextView = root.findViewById(R.id.text_podsumowanie)
-        podsumowanieViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
         return root
     }
 }
