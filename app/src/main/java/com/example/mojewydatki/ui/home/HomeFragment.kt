@@ -37,10 +37,10 @@ class HomeFragment : Fragment() {
         recyclerView.adapter =HomeAdapter(db)
 
         val fragment_wydatek = WydatekFragment()
-      //  root.findViewById<View>(R.id.fab).setOnClickListener() {
-      //      childFragmentManager.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
-      //      root.findViewById<View>(R.id.fab).visibility = View.INVISIBLE
-      //  }
+       // root.findViewById<View>(R.id.fab).setOnClickListener() {
+       //     childFragmentManager.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
+       //     root.findViewById<View>(R.id.fab).visibility = View.INVISIBLE
+      // }
      return root
     }
 }
