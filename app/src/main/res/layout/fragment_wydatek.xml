@@ -124,14 +124,14 @@
 
         <TextView
             android:id="@+id/payDate_textedit"
-            android:layout_width="112dp"
+            android:layout_width="200dp"
             android:layout_height="27dp"
             android:layout_marginTop="34dp"
-            android:layout_marginEnd="192dp"
+            android:layout_marginEnd="100dp"
             android:ems="10"
+
+
             android:inputType="date"
-
-
             android:text="@string/podaj_date"
             android:textAllCaps="false"
             android:textSize="14sp"
