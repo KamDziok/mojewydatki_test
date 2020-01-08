@@ -4,9 +4,9 @@
     <string name="navigation_drawer_close">Zamknięta szuflada nawigacji</string>
     <string name="text_home">Moje wydatki</string>
     <string name="menu_home">Moje wydatki</string>
+    <string name="menu_konto">Dodaj konto</string>
     <string name="menu_przeglad">Przegląd</string>
     <string name="menu_wydatek">Dodaj wydatek</string>
-    <string name="menu_konto">Konto</string>
     <string name="menu_kategorie">Kategorie</string>
     <string name="menu_podsumowanie">Podsumowanie</string>
     <string name="dodaj_wydatek_kwota">Kwota</string>
@@ -18,6 +18,8 @@
     <string name="dodaj_wydatek_zdjecie">Zdjęcie paragonu</string>
     <string name="dodaj_wydatek_tytul">Tytuł</string>
     <string name="dodaj_wydatek_kategoria">Kategoria</string>
-    <string name="dodaj_wydatek_dodaj">Dodaj</string>
-    <string name="dodaj_wydatek_anuluj">Anuluj</string>
+    <string name="dodaj">Dodaj</string>
+    <string name="anuluj">Anuluj</string>
+    <string name="konto">Nazwa konta</string>
+    <string name="saldo_poczatkowe">Saldo początkowe</string>
 </resources>
