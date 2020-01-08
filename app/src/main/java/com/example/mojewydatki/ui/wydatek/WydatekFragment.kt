@@ -28,7 +28,8 @@ class WydatekFragment : Fragment() {
         wydatekViewModel =
                 ViewModelProviders.of(this).get(WydatekViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
-        payDate_textedit.setOnClickListener{
+        val payData = root.findViewById<View>(R.id.payDate_textedit)
+        payData.setOnClickListener{
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
