@@ -12,7 +12,7 @@
         android:layout_height="78dp">
 
         <TextView
-            android:id="@+id/nazwa_konta"
+            android:id="@+id/data_podsumowanie"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/kategoria"
+            android:id="@+id/podsumowanie_wydatki_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/data"
+            android:id="@+id/data_podsumowanie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
@@ -60,6 +60,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kategoria" />
+            app:layout_constraintTop_toBottomOf="@+id/podsumowanie_wydatki_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

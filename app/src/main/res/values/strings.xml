@@ -12,6 +12,9 @@
     <string name="dodaj_wydatek_kwota">Kwota</string>
     <string name="dodaj_wydatek_wplyw">Wpływ</string>
     <string name="dodaj_wydatek_wydatek">Wydatek</string>
+    <string name="podusmowanie_wplywy">Wpływy ⇑</string>
+    <string name="podsumowanie_wydatki">Wydatki ⇓</string>
+    <string name="podsumowanie_bilans">Bilans Σ</string>
     <string name="dodaj_wydatek_data">Data</string>
     <string name="dodaj_wydatek_notatka">Notatka</string>
     <string name="dodaj_wydatek_konto">Konto</string>
@@ -24,4 +27,5 @@
     <string name="saldo_poczatkowe">Saldo początkowe</string>
     <string name="saldo_konta">Saldo</string>
     <string name="kategorie_nazwa_kategorii">Nazwa kategorii</string>
+    <string name="podsumowanie_nw">Najwięcej wydatków w kategorii</string>
 </resources>
