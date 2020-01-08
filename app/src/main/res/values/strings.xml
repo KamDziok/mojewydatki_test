@@ -22,4 +22,5 @@
     <string name="anuluj">Anuluj</string>
     <string name="konto">Nazwa konta</string>
     <string name="saldo_poczatkowe">Saldo początkowe</string>
+    <string name="saldo_konta">Saldo</string>
 </resources>

@@ -5,13 +5,9 @@ import android.provider.BaseColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.R
-import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.pojedynczy_wydatek_row.view.*
 
 class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
@@ -33,9 +29,9 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val payTitle = holder.containerView.tytul_wydatku
+        val payTitle = holder.containerView.nazwa_konta
         val payCategory = holder.containerView.kategoria
-        val payValue = holder.containerView.kwota
+        val payValue = holder.containerView.saldo_konta
         val payDate = holder.containerView.data
 
         val cursor = db.query(PayBase.TABLE_NAME, null,
