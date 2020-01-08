@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/kontoName_textedit"
+            android:id="@+id/categoryTitle_textedit"
             android:layout_width="274dp"
             android:layout_height="38dp"
             android:layout_marginTop="14dp"
@@ -32,7 +32,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payTitle_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textView" />
 
 
         <EditText
@@ -47,10 +47,10 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/payCategory_textedit"
             app:layout_constraintEnd_toStartOf="@+id/radioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/kontoName_textedit" />
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit" />
 
         <TextView
-            android:id="@+id/payTitle_textView"
+            android:id="@+id/categoryTitle_textView"
             android:layout_width="77dp"
             android:layout_height="27dp"
             android:layout_marginStart="30dp"
@@ -70,7 +70,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kontoName_textedit">
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit">
 
             <RadioButton
                 android:id="@+id/radioButton_wplyw"

@@ -23,4 +23,5 @@
     <string name="konto">Nazwa konta</string>
     <string name="saldo_poczatkowe">Saldo początkowe</string>
     <string name="saldo_konta">Saldo</string>
+    <string name="kategorie_nazwa_kategorii">Nazwa kategorii</string>
 </resources>
