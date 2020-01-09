@@ -47,12 +47,12 @@ class MainActivity : AppCompatActivity() {
             val day = payDate_textedit.getText().toString()
             val acount = payKonto_textedit.getText().toString()
             val note = payNotatka_textedit.getText().toString()
-            val radio = -1
+            var radio = -1
             if(radioButton_wplyw.isChecked()){
-                val radio = 0
+                radio = 0
             }
             if(radioButton_wydatek.isChecked()){
-                val radio = 1
+                radio = 1
             }
 
             if(title.isNotEmpty() && saldo.isNotEmpty() && category.isNotEmpty() && day.isNotEmpty() && acount.isNotEmpty() && note.isNotEmpty() && radio >= 0){
