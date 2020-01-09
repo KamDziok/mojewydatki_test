@@ -22,7 +22,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
 
-
+        app:headerLayout="@layout/fragment_konto_rc"
 
         app:menu="@menu/activity_main_drawer" />
 
