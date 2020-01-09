@@ -29,10 +29,10 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val payTitle = holder.containerView.nazwa_kategorii_poj
-        val payCategory = holder.containerView.podsumowanie_wydatki_view
-        val payValue = holder.containerView.bilans_dla_kategorii_oddaty_poj
-        val payDate = holder.containerView.nazwa_kategorii_poj
+        val payTitle = holder.containerView.tytul_wydatku_poj
+        val payCategory = holder.containerView.kategoria_wydatku_poj
+        val payValue = holder.containerView.kwota_wydatku_poj
+        val payDate = holder.containerView.data_wydatku_poj
 
         val cursor = db.query(PayBase.TABLE_NAME, null,
             BaseColumns._ID + "=?", arrayOf(holder.adapterPosition.plus(1).toString()),
