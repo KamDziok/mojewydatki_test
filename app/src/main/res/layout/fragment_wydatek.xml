@@ -212,7 +212,7 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic[8]" />
 
         <Button
-            android:id="@+id/dodaj_konto_button"
+            android:id="@+id/dodaj_wydatek_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
@@ -231,7 +231,7 @@
             android:layout_marginBottom="14dp"
             android:text="@string/anuluj"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dodaj_konto_button" />
+            app:layout_constraintEnd_toStartOf="@+id/dodaj_wydatek_button" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

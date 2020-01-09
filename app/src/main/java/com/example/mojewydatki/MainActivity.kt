@@ -3,6 +3,7 @@ package com.example.mojewydatki
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
@@ -25,6 +26,8 @@ import com.example.mojewydatki.ui.wydatek.WydatekFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.util.*
+import java.text.NumberFormat
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +40,36 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        dodaj_wydatek_button.setOnClickListener{    //listener przycisku dodawania wydatku
+            val title: String = categoryTitle_textedit.getText().toString()
+            val saldo  = konto_saldop_textedit.getText().toString()
+            val category = payCategory_textedit.getText().toString()
+            val day = payDate_textedit.getText().toString()
+            val acount = payKonto_textedit.getText().toString()
+            val note = payNotatka_textedit.getText().toString()
+            val radio = -1
+            if(radioButton_wplyw.isChecked()){
+                val radio = 0
+            }
+            if(radioButton_wydatek.isChecked()){
+                val radio = 1
+            }
+
+            if(title.isNotEmpty() && saldo.isNotEmpty() && category.isNotEmpty() && day.isNotEmpty() && acount.isNotEmpty() && note.isNotEmpty() && radio >= 0){
+                try {
+                    val db: PayDataBase = PayDataBase(this)
+                    val nf = NumberFormat.getInstance()
+                    val saldo = nf.parse(saldo).toDouble()
+                    db.dodajWydatek(title, category, day, saldo, acount, note, radio)
+                }catch (e: Exception) {
+                    var mesage = Toast.makeText(applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
+                    mesage.show()
+                }
+            }else{
+                var mesage = Toast.makeText(applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
+                mesage.show()
+            }
+        }
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
