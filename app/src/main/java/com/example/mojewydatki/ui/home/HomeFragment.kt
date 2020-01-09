@@ -5,17 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mojewydatki.MainActivity
 import com.example.mojewydatki.R
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
-import kotlinx.android.synthetic.main.app_bar_main.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class HomeFragment : Fragment() {
@@ -29,18 +25,26 @@ class HomeFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
+        //Obsluga bazy danych
         val dbH = PayDataBase (activity!!.applicationContext)
         val db = dbH.writableDatabase
 
+        //Obsluga wyswietlania moich_wydatkow na stronie glownej
         val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
         recyclerView.layoutManager=LinearLayoutManager(activity)
         recyclerView.adapter =HomeAdapter(db)
 
+        //Obsluga FloatingActionButton (tego plusa) wyswietlenie
+        val fab = activity!!.fab as? FloatingActionButton
+        fab!!.visibility = View.VISIBLE
+        val fm = activity!!.supportFragmentManager
         val fragment_wydatek = WydatekFragment()
-       // root.findViewById<View>(R.id.fab).setOnClickListener() {
-       //     childFragmentManager.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
-       //     root.findViewById<View>(R.id.fab).visibility = View.INVISIBLE
-      // }
-     return root
+        //aktywacja plusa przeładowanie fragmentu na WydatkiFragment i ukrycie plusa
+        fab!!.setOnClickListener(){
+            fm.beginTransaction().replace(R.id.nav_host_fragment,fragment_wydatek).commit()
+            fab!!.visibility = View.INVISIBLE
+        }
+
+        return root
     }
 }
