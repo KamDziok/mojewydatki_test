@@ -1,5 +1,6 @@
 package com.example.mojewydatki
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,6 +15,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.ui.home.HomeAdapter
@@ -28,25 +31,20 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
 
-
-
-
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        //val fab: FloatingActionButton = findViewById(R.id.fab)
-        //val fm = supportFragmentManager
-        //val fragment_wydatek = WydatekFragment()
-//        fab.setOnClickListener {
-//            fm.beginTransaction().add(R.id.nav_view,fragment_wydatek).commit()
-//
-//        }
+        //Ukrycie FloatingActionButton (ten plus)
+        val fab: FloatingActionButton = findViewById(R.id.fab)
+        fab.visibility = View.INVISIBLE
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
 
@@ -58,15 +56,6 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_konto, R.id.nav_kategorie, R.id.nav_podsumowanie), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        //val recyclerviewHome = findViewById(R.id.recyclerview) as RecyclerView
-        //recyclerviewHome.setL(val LinearLayoutManager(this))
-
-        //recyclerview.layoutManager = LinearLayoutManager(this)
-
-        //recyclerview.adapter = HomeAdapter()
-
-
 
     }
 
