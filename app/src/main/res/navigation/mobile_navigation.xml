@@ -37,5 +37,5 @@
         android:id="@+id/nav_podsumowanie"
         android:name="com.example.mojewydatki.ui.podsumowanie.PodsumowanieFragment"
         android:label="@string/menu_podsumowanie"
-        tools:layout="@layout/fragment_podsumowanie" />
+        tools:layout="@layout/fragment_podsumowanie" /><action android:id="@+id/action_global_nav_home" app:destination="@id/nav_home"/>
 </navigation>

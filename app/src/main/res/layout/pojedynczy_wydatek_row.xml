@@ -12,7 +12,7 @@
         android:layout_height="78dp">
 
         <TextView
-            android:id="@+id/nazwa_kategorii_poj"
+            android:id="@+id/tytul_wydatku_poj"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/podsumowanie_wydatki_view"
+            android:id="@+id/kategoria_wydatku_poj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/bilans_dla_kategorii_oddaty_poj"
+            android:id="@+id/kwota_wydatku_poj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/nazwa_kategorii_poj"
+            android:id="@+id/data_wydatku_poj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
