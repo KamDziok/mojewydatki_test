@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
+import android.util.Log
+import com.example.mojewydatki.ui.home.CategoryDataBase
 
 class KategorieFragment : Fragment() {
 
@@ -41,27 +43,26 @@ class KategorieFragment : Fragment() {
             textView.text = it
         })
         */
-//        root.findViewById<View>(R.id.dodaj_wydatek_button)!!.setOnClickListener{    //listener przycisku dodawania wydatku
-//            val title: String = activity!!.categoryTitle_textedit.getText().toString()
-//            val saldo  = activity!!.konto_saldop_textedit.getText().toString()
-//
-//            Log.d("Baza", title)
-//
-//            if(title.isNotEmpty() && saldo.isNotEmpty() && category.isNotEmpty() && day.isNotEmpty() && acount.isNotEmpty() && note.isNotEmpty() && radio >= 0){
-//                try {
-//                    val db: PayDataBase = PayDataBase(activity!!)
-//                    val nf = NumberFormat.getInstance()
-//                    val saldo = nf.parse(saldo).toDouble()
-//                    db.dodajWydatek(title, category, day, saldo, acount, note, radio)
-//                }catch (e: Exception) {
-//                    var mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
-//                    mesage.show()
-//                }
-//            }else{
-//                var mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
-//                mesage.show()
-//            }
-//        }
+        root.findViewById<View>(R.id.dodaj_konto_button)!!.setOnClickListener{    //listener przycisku dodawania konta
+            var mesage: Toast
+            val title: String = activity!!.categoryTitle_textedit.getText().toString()
+
+            if(title.isNotEmpty()){
+                try {
+                    val db = CategoryDataBase(activity!!)
+                    db.dodajKonto(title)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
+                    mesage.show()
+                }catch (e: Exception) {
+                    Log.d("Baza", e.message)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
+                    mesage.show()
+                }
+            }else{
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
+                mesage.show()
+            }
+        }
 
         return root
     }

@@ -19,7 +19,7 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
     }
 
     override fun getItemCount(): Int {
-        val cursor = db.query(PayBase.TABLE_NAME, null,
+        val cursor = db.query("WYDATKI", null,
             null, null,
             null, null, null)
         val countRow = cursor.count
@@ -34,8 +34,8 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
         val payValue = holder.containerView.bilans_dla_kategorii_oddaty_poj
         val payDate = holder.containerView.nazwa_kategorii_poj
 
-        val cursor = db.query(PayBase.TABLE_NAME, null,
-            BaseColumns._ID + "=?", arrayOf(holder.adapterPosition.plus(1).toString()),
+        val cursor = db.query("WYDATKI", null,
+            "ID_WYDATKU" + "=?", arrayOf(holder.adapterPosition.plus(1).toString()),
             null, null, null)
 
         if(cursor.moveToFirst()){

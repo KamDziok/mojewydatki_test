@@ -36,10 +36,11 @@ class WydatekFragment : Fragment() {
     ): View? {
         wydatekViewModel =
                 ViewModelProviders.of(this).get(WydatekViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
-        val fab = activity!!.fab as? FloatingActionButton
+        val fab = activity!!.fab
         fab!!.visibility = View.INVISIBLE
 
         val payData = root.findViewById<View>(R.id.payDate_textedit)
@@ -54,6 +55,7 @@ class WydatekFragment : Fragment() {
         }
 
         root.findViewById<View>(R.id.dodaj_wydatek_button)!!.setOnClickListener{    //listener przycisku dodawania wydatku
+            var mesage: Toast
             val title: String = activity!!.categoryTitle_textedit.getText().toString()
             val saldoString  = activity!!.konto_saldop_textedit.getText().toString()
             val category = activity!!.payCategory_textedit.getText().toString()
@@ -70,17 +72,19 @@ class WydatekFragment : Fragment() {
 
             if( title.isNotEmpty() && saldoString.isNotEmpty() && category.isNotEmpty() && !day.equals("kliknij by wybrać datę") && acount.isNotEmpty() && note.isNotEmpty() && radio >= 0){
                 try {
-                    val db: PayDataBase = PayDataBase(activity!!)
+                    val db = PayDataBase(activity!!)
                     val nf = NumberFormat.getInstance()
                     val saldo = nf.parse(saldoString).toDouble()
                     db.dodajWydatek(title, category, day, saldo, acount, note, radio)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
+                    mesage.show()
                 }catch (e: Exception) {
                     Log.d("Baza", e.message)
-                    var mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
                     mesage.show()
                 }
             }else{
-                var mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
                 mesage.show()
             }
         }
