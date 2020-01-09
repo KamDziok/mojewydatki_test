@@ -28,20 +28,27 @@ import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.util.*
 import java.text.NumberFormat
 import android.widget.Toast
+import com.example.mojewydatki.ui.home.HomeFragment
+import com.example.mojewydatki.ui.kategorie.KategorieFragment
+import com.example.mojewydatki.ui.konto.KontoFragment
+import com.example.mojewydatki.ui.podsumowanie.PodsumowanieFragment
+import com.example.mojewydatki.ui.przeglad.PrzegladFragment
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    var fm = supportFragmentManager
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val fmToFragment = supportFragmentManager
 
         //Ukrycie FloatingActionButton (ten plus)
         val fab: FloatingActionButton = findViewById(R.id.fab)
@@ -69,5 +76,37 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    //nawigacja w menu
+    fun navHome(){
+        val fragment_home = HomeFragment()
+        fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_home).commit()
+    }
+
+    fun navKategorie(){
+        val fragment_kategorie = KategorieFragment()
+        fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_kategorie).commit()
+    }
+
+    fun navKonto(){
+        val fragment_konto = KontoFragment()
+        fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_konto).commit()
+    }
+
+    fun navPods(){
+        val fragment_pods = PodsumowanieFragment()
+        fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_pods).commit()
+    }
+
+    fun navPrzeg(){
+        val fragment_przeg = PrzegladFragment()
+        fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_przeg).commit()
+    }
+
+    fun navWydatek(){
+        val fragment_wydatek = WydatekFragment()
+        //fm.beginTransaction().remove(fm.findFragmentById(R.id.nav_host_fragment)!!.childFragmentManager.fragments.get(0)!!).commit()
+        fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_wydatek).commit()
     }
 }
