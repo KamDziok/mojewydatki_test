@@ -15,6 +15,7 @@ import com.example.mojewydatki.R
 import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.util.*
 import android.content.Context
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.example.mojewydatki.ui.home.PayDataBase
@@ -53,19 +54,21 @@ class WydatekFragment : Fragment() {
         }
 
         root.findViewById<View>(R.id.dodaj_wydatek_button)!!.setOnClickListener{    //listener przycisku dodawania wydatku
-            val title: String = categoryTitle_textedit.getText().toString()
-            val saldo  = konto_saldop_textedit.getText().toString()
-            val category = payCategory_textedit.getText().toString()
-            val day = payDate_textedit.getText().toString()
-            val acount = payKonto_textedit.getText().toString()
-            val note = payNotatka_textedit.getText().toString()
-            val radio = -1
-            if(radioButton_wplyw.isChecked()){
-                val radio = 0
+            val title: String = activity!!.categoryTitle_textedit.getText().toString()
+            val saldo  = activity!!.konto_saldop_textedit.getText().toString()
+            val category = activity!!.payCategory_textedit.getText().toString()
+            val day = activity!!.payDate_textedit.getText().toString()
+            val acount = activity!!.payKonto_textedit.getText().toString()
+            val note = activity!!.payNotatka_textedit.getText().toString()
+            var radio = -1
+            if(activity!!.radioButton_wplyw.isChecked()){
+                radio = 0
             }
-            if(radioButton_wydatek.isChecked()){
-                val radio = 1
+            if(activity!!.radioButton_wydatek.isChecked()){
+                radio = 1
             }
+
+            Log.d("Baza", title)
 
             if(title.isNotEmpty() && saldo.isNotEmpty() && category.isNotEmpty() && day.isNotEmpty() && acount.isNotEmpty() && note.isNotEmpty() && radio >= 0){
                 try {

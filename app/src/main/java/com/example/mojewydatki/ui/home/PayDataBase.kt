@@ -10,7 +10,8 @@ import androidx.core.content.contentValuesOf
 
 object PayBase: BaseColumns{
 
-    const val TABLE_NAME = "Wydatek"
+    const val TABLE_NAME_WYDATEK = "Wydatek"
+    const val TABLE_NAME_KONTO = "Konto"
     const val payTitle = "Tytul"
     const val payCategory = "Kategoria"
     const val payDate = "Data"
@@ -24,7 +25,7 @@ object PayBase: BaseColumns{
 object TworzenieTabeliWydatek {
 
     const val SQL_CREATE_TABLE: String =
-        "CREATE TABLE ${PayBase.TABLE_NAME} (" +
+        "CREATE TABLE ${PayBase.TABLE_NAME_WYDATEK} (" +
                 "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                 "${PayBase.payTitle} TEXT NOT NULL," +
                 "${PayBase.payCategory} TEXT NOT NULL," +
@@ -34,14 +35,24 @@ object TworzenieTabeliWydatek {
                 "${PayBase.payNote} TEXT NOT NULL)"+
                 "${PayBase.payRadio} INTEGER NOT NULL)"
 
-    const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST ${PayBase.TABLE_NAME}"
+    const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST ${PayBase.TABLE_NAME_WYDATEK}"
 }
 
-class PayDataBase(context: Context) : SQLiteOpenHelper(context, PayBase.TABLE_NAME, null, 1) {
+object TworzenieTabeliKonto {
+
+    const val SQL_CREATE_TABLE: String =
+        "CREATE TABLE ${PayBase.TABLE_NAME_KONTO} (" +
+                "${PayBase.payValue} DOUBLE NOT NULL)"+
+                "${PayBase.payAcount} TEXT NOT NULL,"
+
+    const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST ${PayBase.TABLE_NAME_KONTO}"
+}
+
+class PayDataBase(context: Context) : SQLiteOpenHelper(context, PayBase.TABLE_NAME_WYDATEK, null, 1) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL (TworzenieTabeliWydatek.SQL_CREATE_TABLE)
-
+        db?.execSQL (TworzenieTabeliKonto.SQL_CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -60,6 +71,13 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, PayBase.TABLE_NA
         row.put("Notatka", note)
         row.put("Wydatek", radio)
         db.insertOrThrow("Wydatek", null, row)
+    }
+
+    fun dodajKonto(acount: String, value: Double){
+        val db: SQLiteDatabase = getWritableDatabase()
+        val row: ContentValues = ContentValues()
+        row.put("Kwota", value)
+        row.put("Konto", acount)
     }
 }
 /*
