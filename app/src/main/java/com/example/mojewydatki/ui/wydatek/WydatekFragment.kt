@@ -1,5 +1,6 @@
 package com.example.mojewydatki.ui.wydatek
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,12 +15,15 @@ import com.example.mojewydatki.R
 import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.util.*
 import android.content.Context
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class WydatekFragment : Fragment() {
 
     private lateinit var wydatekViewModel: WydatekViewModel
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +32,11 @@ class WydatekFragment : Fragment() {
         wydatekViewModel =
                 ViewModelProviders.of(this).get(WydatekViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
+
+        //Obsluga FloatingActionButton (tego plusa) ukrycie
+        val fab = activity!!.fab as? FloatingActionButton
+        fab!!.visibility = View.INVISIBLE
+
         val payData = root.findViewById<View>(R.id.payDate_textedit)
         payData.setOnClickListener{
             val c = Calendar.getInstance()
