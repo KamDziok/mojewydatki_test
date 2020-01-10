@@ -5,94 +5,103 @@
     android:id="@+id/konto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:id="@+id/categoryTitle_textedit"
-            android:layout_width="274dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="30dp"
-            android:inputType="text"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingTop="14dp"
+        android:paddingRight="14dp"
+        >
 
         <TextView
             android:id="@+id/konto_saldop_textView"
-            android:layout_width="77dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="130dp"
+            android:layout_height="27dp"
+
             android:text="@string/saldo_poczatkowe"
             android:textSize="14sp"
+
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textView" />
 
-
         <EditText
-            android:id="@+id/konto_saldop_textedit"
+            android:id="@+id/categoryTitle_textedit"
             android:layout_width="60dp"
             android:layout_height="38dp"
-            android:layout_marginTop="37dp"
-            android:layout_marginEnd="30dp"
-            android:ems="10"
+            android:digits="0123456789,."
             android:inputType="text"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingTop="14dp"
+        android:paddingRight="14dp"
+        >
 
         <TextView
             android:id="@+id/categoryTitle_textView"
-            android:layout_width="77dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="14dp"
+            android:layout_width="130dp"
+            android:layout_height="27dp"
+
             android:text="@string/konto"
             android:textSize="14sp"
+
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <EditText
+            android:id="@+id/konto_saldop_textedit"
+            android:layout_width="195dp"
+            android:layout_height="38dp"
+            android:inputType="text"
 
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit"/>
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit" />
 
-        <Button
-            android:id="@+id/dodaj_konto_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="14dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/dodaj"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:paddingRight="14dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/anuluj_konto_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="14dp"
-            android:text="@string/anuluj"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dodaj_wydatek_button" />
 
+            android:text="@string/anuluj" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/dodaj_konto_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/dodaj"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
+
