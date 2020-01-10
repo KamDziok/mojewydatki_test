@@ -1,6 +1,7 @@
 package com.example.mojewydatki.ui.kategorie
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +18,14 @@ import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
 import android.util.Log
+import android.view.Window
+import android.widget.Button
 import com.example.mojewydatki.ui.home.CategoryDataBase
 
 class KategorieFragment : Fragment() {
-
+    internal lateinit var btn : Button
+    internal lateinit var myDialog : Dialog
+    internal lateinit var txt : TextView
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -31,7 +36,11 @@ class KategorieFragment : Fragment() {
 
 
         val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
+        btn = root.findViewById<View>(R.id.dodaj_kategorie) as Button
+        btn.setOnClickListener{
 
+            ShowDialog()
+        }
         //Obsluga FloatingActionButton (tego plusa) ukrycie
         val fab = activity!!.fab as? FloatingActionButton
         fab!!.visibility = View.INVISIBLE
@@ -60,5 +69,21 @@ class KategorieFragment : Fragment() {
         */
 
         return root
+    }
+    fun ShowDialog(){
+
+        myDialog = Dialog(activity!!)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.fragment_kategorie)
+
+
+        txt = myDialog.findViewById<View>(R.id.dodaj_kategorie_button) as TextView
+        txt.isEnabled = true
+        txt.setOnClickListener{
+
+            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
+            myDialog.cancel()
+        }
+        myDialog.show()
     }
 }
