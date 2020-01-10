@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.R
 import com.example.mojewydatki.ui.home.PayDataBase
+import kotlinx.android.synthetic.main.fragment_konto.*
+import java.text.NumberFormat
 
 class Konto_Fragment : Fragment() {
     internal lateinit var btn : Button
@@ -63,5 +65,34 @@ class Konto_Fragment : Fragment() {
             myDialog.cancel()
         }
         myDialog.show()
+
+        myDialog.findViewById<View>(R.id.dodaj_konto_button)!!.setOnClickListener{
+            var mesage: Toast
+            val kontoNazwa: String = myDialog.konto_nazwa_textedit.getText().toString()
+            val kontoSaldoS: String = myDialog.kat_nazwa_textedit.getText().toString()
+
+            if(kontoNazwa.isNotEmpty() && kontoSaldoS.isNotEmpty()) {
+                try{
+                    val nf = NumberFormat.getInstance()
+                    val saldo = nf.parse(kontoSaldoS).toDouble()
+
+                    val db: PayDataBase = PayDataBase(activity!!)
+                    db.dodajKonto(kontoNazwa, saldo)
+
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_LONG)
+                    mesage.show()
+
+                    //czyszczenie formularza
+                    myDialog.konto_nazwa_textedit.setText("")
+                    myDialog.kat_nazwa_textedit.setText("")
+                }catch (e: Exception){
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_LONG)
+                    mesage.show()
+                }
+            }else{
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_LONG)
+                mesage.show()
+            }
+        }
     }
 }

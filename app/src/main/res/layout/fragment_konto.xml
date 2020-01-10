@@ -30,7 +30,7 @@
             app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textView" />
 
         <EditText
-            android:id="@+id/categoryTitle_textedit"
+            android:id="@+id/kat_nazwa_textedit"
             android:layout_width="60dp"
             android:layout_height="38dp"
             android:digits="0123456789,."
@@ -63,14 +63,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/konto_saldop_textedit"
+            android:id="@+id/konto_nazwa_textedit"
             android:layout_width="195dp"
             android:layout_height="38dp"
             android:inputType="text"
 
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit" />
+            app:layout_constraintTop_toBottomOf="@+id/kat_nazwa_textedit" />
 
     </LinearLayout>
 

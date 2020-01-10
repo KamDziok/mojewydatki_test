@@ -9,20 +9,45 @@ import android.text.Editable
 import androidx.core.content.contentValuesOf
 import com.example.mojewydatki.ui.wydatek.Contact
 
+object WydatekInfo{
+    const val TABLE_NAME = "WYDATKI"
+    const val TABLE_COLUMN_ID = "ID_WYDATKU"
+    const val TABLE_COLUMN_TYTUL = "Tytul"
+    const val TABLE_COLUMN_IDKAT = "ID_KATEGORII"
+    const val TABLE_COLUMN_DATA = "Data"
+    const val TABLE_COLUMN_KWOTA = "Kwota"
+    const val TABLE_COLUMN_IDKONTA = "ID_KONTA"
+    const val TABLE_COLUMN_NOTATKA = "Notatka"
+    const val TABLE_COLUMN_RODZAJ = "Rodzaj"
+}
+
+object KategorieInfo{
+    const val TABLE_NAME = "KATEGORIE"
+    const val TABLE_COLUMN_ID = "ID_KATEGORII"
+    const val TABLE_COLUMN_KATEGORIA = "Kategoria"
+}
+
+object KontoInfo{
+    const val TABLE_NAME = "KONTA"
+    const val TABLE_COLUMN_ID = "ID_KONTA"
+    const val TABLE_COLUMN_KONTO = "Konto"
+    const val TABLE_COLUMN_SALDO = "Kwota"
+}
+
 object TworzenieTabeliWydatek {
 
     const val SQL_CREATE_TABLE: String =
-        "CREATE TABLE WYDATKI (" +
-            "ID_WYDATKU INTEGER PRIMARY KEY," +
-            "Tytul TEXT NOT NULL," +
-            "ID_KATEGORII INTEGER NOT NULL," +
-            "Data TEXT NOT NULL," +
-            "Kwota DOUBLE NOT NULL,"+
-            "ID_KONTA INTEGER NOT NULL," +
-            "Notatka TEXT NOT NULL,"+
-            "Rodzaj INTEGER NOT NULL," +
-            "FOREIGN KEY(ID_KATEGORII) REFERENCES KATEGORIE(ID_KATEGORII)," +
-            "FOREIGN KEY(ID_KONTA) REFERENCES KONTO(ID_KONTA))"
+        "CREATE TABLE ${WydatekInfo.TABLE_NAME} (" +
+            "${WydatekInfo.TABLE_COLUMN_ID} INTEGER PRIMARY KEY," +
+            "${WydatekInfo.TABLE_COLUMN_TYTUL} TEXT NOT NULL," +
+            "${KategorieInfo.TABLE_COLUMN_ID} INTEGER NOT NULL," +
+            "${WydatekInfo.TABLE_COLUMN_DATA} TEXT NOT NULL," +
+            "${WydatekInfo.TABLE_COLUMN_KWOTA} DOUBLE NOT NULL,"+
+            "${KontoInfo.TABLE_COLUMN_ID} INTEGER NOT NULL," +
+            "${WydatekInfo.TABLE_COLUMN_NOTATKA} TEXT NOT NULL,"+
+            "${WydatekInfo.TABLE_COLUMN_RODZAJ} INTEGER NOT NULL," +
+            "FOREIGN KEY(${KategorieInfo.TABLE_COLUMN_ID}) REFERENCES ${KategorieInfo.TABLE_NAME}(${KategorieInfo.TABLE_COLUMN_ID})," +
+            "FOREIGN KEY(${KontoInfo.TABLE_COLUMN_ID}) REFERENCES ${KontoInfo.TABLE_NAME}(${KontoInfo.TABLE_COLUMN_ID}))"
 
     const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST WYDATKI"
 }
@@ -30,10 +55,10 @@ object TworzenieTabeliWydatek {
 object TworzenieTabeliKonta {
 
     const val SQL_CREATE_TABLE: String =
-        "CREATE TABLE KONTA (" +
-                "ID_KONTA INTEGER PRIMARY KEY," +
-                "Konto TEXT NOT NULL,"+
-                "Kwota DOUBLE NOT NULL)"
+        "CREATE TABLE ${KontoInfo.TABLE_NAME} (" +
+                "${KontoInfo.TABLE_COLUMN_ID} INTEGER PRIMARY KEY," +
+                "${KontoInfo.TABLE_COLUMN_KONTO} TEXT NOT NULL,"+
+                "${KontoInfo.TABLE_COLUMN_SALDO} DOUBLE NOT NULL)"
 
     const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST KONTA"
 }
@@ -41,9 +66,9 @@ object TworzenieTabeliKonta {
 object TworzenieTabeliKategori {
 
     const val SQL_CREATE_TABLE: String =
-        "CREATE TABLE KATEGORIE (" +
-                "ID_KATEGORII INTEGER PRIMARY KEY," +
-                "Kategoria TEXT NOT NULL)"
+        "CREATE TABLE ${KategorieInfo.TABLE_NAME} (" +
+                "${KategorieInfo.TABLE_COLUMN_ID} INTEGER PRIMARY KEY," +
+                "${KategorieInfo.TABLE_COLUMN_KATEGORIA} TEXT NOT NULL)"
 
     const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST KONTA"
 }

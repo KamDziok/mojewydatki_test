@@ -6,18 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.mojewydatki.R
 import com.example.mojewydatki.ui.home.PayDataBase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
-import kotlin.Exception as Exception1
 
 class Konto_add_Fragment : Fragment() {
 
@@ -39,8 +35,8 @@ class Konto_add_Fragment : Fragment() {
 
         root.findViewById<View>(R.id.dodaj_konto_button)!!.setOnClickListener{    //listener przycisku dodawania konta
             var mesage: Toast
-            val title: String = activity!!.categoryTitle_textedit.getText().toString()
-            val saldoString  = activity!!.konto_saldop_textedit.getText().toString()
+            val title: String = activity!!.kat_nazwa_textedit.getText().toString()
+            val saldoString  = activity!!.konto_nazwa_textedit.getText().toString()
 
             if(title.isNotEmpty() && saldoString.isNotEmpty()){
                 try {

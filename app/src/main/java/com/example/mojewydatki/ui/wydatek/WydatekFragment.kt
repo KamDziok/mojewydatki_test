@@ -6,17 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.mojewydatki.R
 import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.util.*
 import android.content.Context
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import com.example.mojewydatki.ui.home.PayDataBase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -58,8 +53,8 @@ class WydatekFragment : Fragment() {
 
         root.findViewById<View>(R.id.dodaj_wydatek_button)!!.setOnClickListener{    //listener przycisku dodawania wydatku
             var mesage: Toast
-            val title: String = activity!!.categoryTitle_textedit.getText().toString()
-            val saldoString  = activity!!.konto_saldop_textedit.getText().toString()
+            val title: String = activity!!.kat_nazwa_textedit.getText().toString()
+            val saldoString  = activity!!.konto_nazwa_textedit.getText().toString()
             val category = activity!!.payCategory_textedit.getText().toString()
             val day = activity!!.payDate_textedit.getText().toString()
             val acount = activity!!.payKonto_textedit.getText().toString()
@@ -85,8 +80,8 @@ class WydatekFragment : Fragment() {
 //                    db.dodajWydatek(title, category, day, saldo, acount,
 
                     //czyszczenie formularza
-                    activity!!.categoryTitle_textedit.setText("")
-                    activity!!.konto_saldop_textedit.setText("")
+                    activity!!.kat_nazwa_textedit.setText("")
+                    activity!!.konto_nazwa_textedit.setText("")
                     activity!!.payCategory_textedit.setText("")
                     activity!!.payDate_textedit.setText("kliknij by wybrać datę")
                     activity!!.payKonto_textedit.setText("")

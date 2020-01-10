@@ -30,7 +30,7 @@ android:orientation="vertical">
         app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textView" />
 
     <EditText
-        android:id="@+id/categoryTitle_textedit"
+        android:id="@+id/kat_nazwa_textedit"
         android:layout_width="195dp"
         android:layout_height="38dp"
         android:digits="0123456789,."

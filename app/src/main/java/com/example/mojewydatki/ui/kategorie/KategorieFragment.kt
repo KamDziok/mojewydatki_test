@@ -9,20 +9,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.mojewydatki.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
 import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
-import android.util.Log
 import android.widget.Button
 import android.view.Window
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mojewydatki.ui.konto_.Konto_Adapter
+import kotlinx.android.synthetic.main.fragment_kategorie.*
+import kotlinx.android.synthetic.main.fragment_konto.kat_nazwa_textedit
 
 class KategorieFragment : Fragment() {
     internal lateinit var btn : Button
@@ -98,5 +96,29 @@ class KategorieFragment : Fragment() {
             myDialog.cancel()
         }
         myDialog.show()
+
+        myDialog.findViewById<View>(R.id.dodaj_kategorie_button)!!.setOnClickListener{
+            var mesage: Toast
+            val katNazwa: String = myDialog.kat_nazwa_textedit.getText().toString()
+
+            if(katNazwa.isNotEmpty()) {
+                try{
+                    val db: PayDataBase = PayDataBase(activity!!)
+                    db.dodajKategorie(katNazwa)
+
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_LONG)
+                    mesage.show()
+
+                    //czyszczenie formularza
+                    myDialog.kat_nazwa_textedit.setText("")
+                }catch (e: Exception){
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_LONG)
+                    mesage.show()
+                }
+            }else{
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_LONG)
+                mesage.show()
+            }
+        }
     }
 }

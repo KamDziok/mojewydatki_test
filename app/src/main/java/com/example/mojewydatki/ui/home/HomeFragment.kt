@@ -15,8 +15,12 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
-import android.app.Activity
-
+import android.app.DatePickerDialog
+import android.content.Context
+import android.util.Log
+import kotlinx.android.synthetic.main.fragment_wydatek.*
+import java.text.NumberFormat
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -79,6 +83,66 @@ class HomeFragment : Fragment() {
             myDialog.cancel()
         }
         myDialog.show()
+
+        val payData = myDialog.findViewById<View>(R.id.payDate_textedit)
+        payData.setOnClickListener{
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            val activity = activity as Context
+            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay -> payDate_textedit.setText(""+mDay+"."+(mMonth+1)+"."+mYear)}, year,month,day)
+            dpd.show()
+        }
+
+        myDialog.findViewById<View>(R.id.dodaj_wydatek_button)!!.setOnClickListener{    //listener przycisku dodawania wydatku
+            var mesage: Toast
+            val title: String = myDialog.kat_nazwa_textedit.getText().toString()
+            val saldoString  = myDialog.konto_nazwa_textedit.getText().toString()
+            val category = myDialog.payCategory_textedit.getText().toString()
+            val day = myDialog.payDate_textedit.getText().toString()
+            val acount = myDialog.payKonto_textedit.getText().toString()
+            val note = myDialog.payNotatka_textedit.getText().toString()
+            var radio = -1
+            if(myDialog.radioButton_wplyw.isChecked()){
+                radio = 0
+            }
+            if(myDialog.radioButton_wydatek.isChecked()){
+                radio = 1
+            }
+
+            if( title.isNotEmpty() && saldoString.isNotEmpty() && category.isNotEmpty() && !day.equals("kliknij by wybrać datę") && acount.isNotEmpty() && note.isNotEmpty() && radio >= 0){
+                try {
+                    val db: PayDataBase = PayDataBase(activity!!)
+                    val nf = NumberFormat.getInstance()
+                    val saldo = nf.parse(saldoString).toDouble()
+                    db.dodajKonto(acount, 0.0)
+                    val idKonta = db.getIDKonta(acount)!!.id
+                    db.dodajKategorie(category)
+                    val idKat = db.getIDKat(category)!!.id
+                    db.dodajWydatek2(title, idKat, day, saldo, idKonta, note, radio)
+//                    db.dodajWydatek(title, category, day, saldo, acount,
+
+                    //czyszczenie formularza
+                    myDialog.kat_nazwa_textedit.setText("")
+                    myDialog.konto_nazwa_textedit.setText("")
+                    myDialog.payCategory_textedit.setText("")
+                    myDialog.payDate_textedit.setText("kliknij by wybrać datę")
+                    myDialog.payKonto_textedit.setText("")
+                    myDialog.payNotatka_textedit.setText("")
+
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
+                    mesage.show()
+                }catch (e: Exception) {
+                    Log.d("Baza", e.message)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
+                    mesage.show()
+                }
+            }else{
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
+                mesage.show()
+            }
+        }
     }
 
 }

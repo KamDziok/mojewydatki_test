@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/categoryTitle_textedit"
+            android:id="@+id/kat_nazwa_textedit"
             android:layout_width="195dp"
             android:layout_height="38dp"
             android:layout_marginTop="14dp"
@@ -35,7 +35,7 @@
 
 
         <EditText
-            android:id="@+id/konto_saldop_textedit"
+            android:id="@+id/konto_nazwa_textedit"
             android:layout_width="60dp"
             android:layout_height="38dp"
             android:layout_marginStart="107dp"
@@ -47,7 +47,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/payCategory_textedit"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit" />
+            app:layout_constraintTop_toBottomOf="@+id/kat_nazwa_textedit" />
 
         <TextView
             android:id="@+id/categoryTitle_textView"
@@ -68,8 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="34dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@+id/konto_saldop_textedit"
-            app:layout_constraintTop_toBottomOf="@+id/categoryTitle_textedit">
+            app:layout_constraintStart_toEndOf="@+id/konto_nazwa_textedit"
+            app:layout_constraintTop_toBottomOf="@+id/kat_nazwa_textedit">
 
             <RadioButton
                 android:id="@+id/radioButton_wplyw"
@@ -94,7 +94,7 @@
             android:inputType="text"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/payCategory_textView"
-            app:layout_constraintTop_toBottomOf="@+id/konto_saldop_textedit" />
+            app:layout_constraintTop_toBottomOf="@+id/konto_nazwa_textedit" />
 
         <TextView
             android:id="@+id/payCategory_textView"
