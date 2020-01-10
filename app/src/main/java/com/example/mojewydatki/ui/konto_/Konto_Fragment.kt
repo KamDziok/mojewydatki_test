@@ -59,13 +59,11 @@ class Konto_Fragment : Fragment() {
 
         txt = myDialog.findViewById<View>(R.id.dodaj_konto_button) as TextView
         txt.isEnabled = true
-        txt.setOnClickListener{
+        myDialog.show()
+        myDialog.findViewById<View>(R.id.anuluj_konto_button)!!.setOnClickListener{
 
-            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
             myDialog.cancel()
         }
-        myDialog.show()
-
         myDialog.findViewById<View>(R.id.dodaj_konto_button)!!.setOnClickListener{
             var mesage: Toast
             val kontoNazwa: String = myDialog.konto_nazwa_textedit.getText().toString()
@@ -85,6 +83,7 @@ class Konto_Fragment : Fragment() {
                     //czyszczenie formularza
                     myDialog.konto_nazwa_textedit.setText("")
                     myDialog.kat_nazwa_textedit.setText("")
+                    myDialog.cancel()
                 }catch (e: Exception){
                     mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_LONG)
                     mesage.show()

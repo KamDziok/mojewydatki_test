@@ -77,13 +77,12 @@ class HomeFragment : Fragment() {
 
         txt = myDialog.findViewById<View>(R.id.dodaj_wydatek_button) as TextView
         txt.isEnabled = true
-        txt.setOnClickListener{
 
-            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
+        myDialog.show()
+        myDialog.findViewById<View>(R.id.anuluj_wydatek_button)!!.setOnClickListener{
+
             myDialog.cancel()
         }
-        myDialog.show()
-
         val payData = myDialog.findViewById<View>(R.id.payDate_textedit)
         payData.setOnClickListener{
             val c = Calendar.getInstance()
@@ -133,6 +132,7 @@ class HomeFragment : Fragment() {
 
                     mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
                     mesage.show()
+                    myDialog.cancel()
                 }catch (e: Exception) {
                     Log.d("Baza", e.message)
                     mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)

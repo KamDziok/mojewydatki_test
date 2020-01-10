@@ -90,13 +90,12 @@ class KategorieFragment : Fragment() {
 
         txt = myDialog.findViewById<View>(R.id.dodaj_kategorie_button) as TextView
         txt.isEnabled = true
-        txt.setOnClickListener{
 
-            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
+        myDialog.show()
+        myDialog.findViewById<View>(R.id.anuluj_kategorie_button)!!.setOnClickListener{
+
             myDialog.cancel()
         }
-        myDialog.show()
-
         myDialog.findViewById<View>(R.id.dodaj_kategorie_button)!!.setOnClickListener{
             var mesage: Toast
             val katNazwa: String = myDialog.kat_nazwa_textedit.getText().toString()
@@ -111,6 +110,7 @@ class KategorieFragment : Fragment() {
 
                     //czyszczenie formularza
                     myDialog.kat_nazwa_textedit.setText("")
+                    myDialog.cancel()
                 }catch (e: Exception){
                     mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_LONG)
                     mesage.show()
