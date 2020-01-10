@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_kategorie.*
 import kotlinx.android.synthetic.main.fragment_konto.kat_nazwa_textedit
 
 class KategorieFragment : Fragment() {
-    internal lateinit var btn : Button
+    internal lateinit var btn : com.google.android.material.floatingactionbutton.FloatingActionButton
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
 
@@ -36,7 +36,7 @@ class KategorieFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
 
-        btn = root.findViewById<View>(R.id.dodaj_kategorie) as Button
+        btn = root.findViewById<View>(R.id.dodaj_kategorie) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
 
             ShowDialog()

@@ -5,11 +5,12 @@
     android:id="@+id/wydatek"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:paddingRight="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/kat_nazwa_textedit"
@@ -207,31 +208,34 @@
             app:layout_constraintTop_toBottomOf="@+id/payNotatka_textedit"
             tools:srcCompat="@tools:sample/backgrounds/scenic[8]" />
 
-        <Button
-            android:id="@+id/dodaj_wydatek_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="30dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/dodaj"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/anuluj_wydatek_button"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/anuluj_wydatek_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="205dp"
-            android:layout_marginTop="14dp"
-            android:text="@string/anuluj"
-            app:layout_constraintEnd_toStartOf="@+id/dodaj_wydatek_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+            android:text="@string/anuluj" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/dodaj_wydatek_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/dodaj"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
 
 </LinearLayout>
