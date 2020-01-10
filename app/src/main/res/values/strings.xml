@@ -29,6 +29,7 @@
     <string name="kategorie_nazwa_kategorii">Nazwa kategorii</string>
     <string name="podsumowanie_nw">Najwięcej wydatków w kategorii</string>
     <string name="podaj_date">kliknij by wybrać datę</string>
+    <string name="podaj_kat">kliknij by wybrać kategorię</string>
     <string name="strzalkawprawo">►</string>
     <string name="strzalkawlewo">◄</string>
 </resources>
