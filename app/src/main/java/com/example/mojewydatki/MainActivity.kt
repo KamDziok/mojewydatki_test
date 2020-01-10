@@ -1,6 +1,7 @@
 package com.example.mojewydatki
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.navigation.findNavController
@@ -14,10 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
 import com.example.mojewydatki.ui.home.HomeFragment
+import com.example.mojewydatki.ui.home.PayDataBase
 import com.example.mojewydatki.ui.kategorie.KategorieFragment
 import com.example.mojewydatki.ui.konto.Konto_add_Fragment
+import com.example.mojewydatki.ui.konto_.Konto_Adapter
 import com.example.mojewydatki.ui.podsumowanie.PodsumowanieFragment
 import com.example.mojewydatki.ui.przeglad.PrzegladFragment
 
@@ -53,13 +58,36 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        //Obsluga bazy danych
+        val dbK = PayDataBase (applicationContext)
+        val db = dbK.writableDatabase
+        //Obsluga wyswietlania moich_kont
+        val recyclerView: RecyclerView = findViewById(R.id.konto_rc_menu)
+        recyclerView.layoutManager= LinearLayoutManager(applicationContext)
+        recyclerView.adapter = Konto_Adapter(db)
         return true
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+
+
+        //Obsluga bazy danych
+        val dbK = PayDataBase (applicationContext)
+        val db = dbK.writableDatabase
+        //Obsluga wyswietlania moich_kont
+        val recyclerView: RecyclerView = findViewById(R.id.konto_rc_menu)
+        recyclerView.layoutManager= LinearLayoutManager(applicationContext)
+        recyclerView.adapter = Konto_Adapter(db)
+        return true
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
