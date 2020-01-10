@@ -18,7 +18,6 @@ import android.content.Context
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import com.example.mojewydatki.ui.home.HomeFragment
 import com.example.mojewydatki.ui.home.PayDataBase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -55,6 +54,7 @@ class WydatekFragment : Fragment() {
         }
 
         root.findViewById<View>(R.id.dodaj_wydatek_button)!!.setOnClickListener{    //listener przycisku dodawania wydatku
+            var mesage: Toast
             val title: String = activity!!.categoryTitle_textedit.getText().toString()
             val saldoString  = activity!!.konto_saldop_textedit.getText().toString()
             val category = activity!!.payCategory_textedit.getText().toString()
@@ -76,24 +76,23 @@ class WydatekFragment : Fragment() {
                     val saldo = nf.parse(saldoString).toDouble()
                     db.dodajWydatek(title, category, day, saldo, acount, note, radio)
 
+                    //czyszczenie formularza
                     activity!!.categoryTitle_textedit.setText("")
                     activity!!.konto_saldop_textedit.setText("")
                     activity!!.payCategory_textedit.setText("")
                     activity!!.payDate_textedit.setText("kliknij by wybrać datę")
                     activity!!.payKonto_textedit.setText("")
                     activity!!.payNotatka_textedit.setText("")
-                    var mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
+
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
                     mesage.show()
-//                    val fm = activity!!.supportFragmentManager
-//                    val fragment_home = HomeFragment()
-//                    fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_home).commit()
                 }catch (e: Exception) {
                     Log.d("Baza", e.message)
-                    var mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
                     mesage.show()
                 }
             }else{
-                var mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
                 mesage.show()
             }
         }

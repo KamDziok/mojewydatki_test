@@ -1,5 +1,6 @@
-package com.example.mojewydatki.ui.home
+package com.example.mojewydatki.ui.konto_
 
+/*
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import android.view.LayoutInflater
@@ -8,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.pojedynczy_wydatek_row.view.*
+import kotlinx.android.synthetic.main.pojedyncze_konto_row.*
 
 class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
 
@@ -53,12 +54,14 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
             payValue.setText(cursor.getString(3))
             payDate.setText(cursor.getString(4))
         }
-    /*
-            payTitle.setText(PayDataBase.payTitle[position])
-            payCategory.setText(PayDataBase.payCategory[position])
-            payValue.setText(PayDataBase.payValue[position].toString())
-            payDate.setText(PayDataBase.payDate[position])
-    */
+        /*
+                payTitle.setText(PayDataBase.payTitle[position])
+                payCategory.setText(PayDataBase.payCategory[position])
+                payValue.setText(PayDataBase.payValue[position].toString())
+                payDate.setText(PayDataBase.payDate[position])
+        */
     }
     inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer
 }
+
+ */
