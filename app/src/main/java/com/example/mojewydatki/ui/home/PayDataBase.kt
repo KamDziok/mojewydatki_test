@@ -155,6 +155,22 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         db.insertOrThrow("KATEGORIE", null, row)
     }
 
+    fun usunKategorie(idKat: Int): Boolean{
+        val db = this.writableDatabase
+        val _success = db.delete(KategorieInfo.TABLE_NAME, KategorieInfo.TABLE_COLUMN_ID + "=?", arrayOf(idKat.toString())).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
+
+    fun edytujKategorie(idKat: Int, nazwaKat: String): Boolean{
+        val db = this.writableDatabase
+        val value = ContentValues()
+        value.put(KategorieInfo.TABLE_COLUMN_KATEGORIA, nazwaKat)
+        val _success = db.update(KategorieInfo.TABLE_NAME, value, KategorieInfo.TABLE_COLUMN_ID + "=?", arrayOf(idKat.toString())).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
+
 //    fun getKatSaldo(idKat: Int): Int {
 //        val db = this.writableDatabase
 //        val selectQuery = "SELECT SUM(Kwota) FROM KATEGORIE WHERE WYDATKI = ?"

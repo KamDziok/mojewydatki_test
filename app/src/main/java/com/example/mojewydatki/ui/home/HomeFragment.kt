@@ -21,6 +21,7 @@ import android.util.Log
 import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.text.NumberFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -35,8 +36,9 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+        var testData = ArrayList<Wydatek>()
 
-         btn = root.findViewById<View>(R.id.dodaj_wydatek) as com.google.android.material.floatingactionbutton.FloatingActionButton
+        btn = root.findViewById<View>(R.id.dodaj_wydatek) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
 
             ShowDialog()
@@ -49,7 +51,7 @@ class HomeFragment : Fragment() {
         //Obsluga wyswietlania moich_wydatkow na stronie glownej
         val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
         recyclerView.layoutManager=LinearLayoutManager(activity)
-        recyclerView.adapter =HomeAdapter(db)
+        recyclerView.adapter =HomeAdapter(db, testData, { partItem : Wydatek -> partItemClicked(partItem) })
 
         //Obsluga FloatingActionButton (tego plusa) wyswietlenie
         val fab = activity!!.fab
@@ -66,6 +68,10 @@ class HomeFragment : Fragment() {
 //        }
 
         return root
+    }
+
+    private fun partItemClicked(partItem : Wydatek) {
+        Toast.makeText(activity!!, "Clicked: ${partItem.tytul}", Toast.LENGTH_LONG).show()
     }
 
     fun ShowDialog(){
@@ -91,7 +97,7 @@ class HomeFragment : Fragment() {
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             val activity = activity as Context
-            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay -> payDate_textedit.setText(""+mDay+"."+(mMonth+1)+"."+mYear)}, year,month,day)
+            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener{ _, mYear, mMonth, mDay -> payDate_textedit.setText(""+mDay+"."+(mMonth+1)+"."+mYear)}, year,month,day)
             dpd.show()
         }
 

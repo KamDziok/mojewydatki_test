@@ -9,7 +9,19 @@ import com.example.mojewydatki.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.pojedynczy_przeglad_row.view.*
 
-class KategorieAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<KategorieAdapter.ViewHolder>() {
+class Kategoria(id: Int, nazwa: String){
+    var id: Int = 0
+    var nazwaKat: String = ""
+
+    init{
+        this.id = id
+        this.nazwaKat = nazwa
+    }
+}
+
+class KategorieAdapter(val db: SQLiteDatabase, val clickListener: (Kategoria) -> Unit) : RecyclerView.Adapter<KategorieAdapter.ViewHolder>() {
+
+    var partItemList = ArrayList<Kategoria>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -36,12 +48,18 @@ class KategorieAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<KategorieA
             null, null, null)
 
         if(cursor.moveToFirst()){
-
-            katName.setText(cursor.getString(1))
+            var kategoria = Kategoria(cursor.getInt(0), cursor.getString(1))
+            this.partItemList.add(kategoria)
+            (holder as ViewHolder).bind(partItemList[position], clickListener)
             katSaldo.setText("")
         }
     }
 
     inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
-        LayoutContainer
+        LayoutContainer{
+        fun bind(part: Kategoria, clickListener: (Kategoria) -> Unit) {
+            containerView.nazwa_kategorii_poj.text = part.nazwaKat
+            containerView.setOnClickListener { clickListener(part)}
+        }
+    }
 }

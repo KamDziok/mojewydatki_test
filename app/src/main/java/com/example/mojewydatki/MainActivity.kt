@@ -14,10 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
 import com.example.mojewydatki.ui.home.HomeFragment
+import com.example.mojewydatki.ui.home.PayDataBase
 import com.example.mojewydatki.ui.kategorie.KategorieFragment
 import com.example.mojewydatki.ui.konto.Konto_add_Fragment
+import com.example.mojewydatki.ui.konto_.Konto_Adapter
 import com.example.mojewydatki.ui.podsumowanie.PodsumowanieFragment
 import com.example.mojewydatki.ui.przeglad.PrzegladFragment
 
@@ -52,6 +56,15 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_konto, R.id.nav_kategorie, R.id.nav_podsumowanie), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+//        //Obsluga bazy danych
+//        val dbK = PayDataBase (applicationContext)
+//        val db = dbK.writableDatabase
+//
+//        //Obsluga wyswietlania moich_kont
+//        val recyclerView: RecyclerView = findViewById(R.id.konto_rc)
+//        recyclerView.layoutManager= LinearLayoutManager(this)
+//        recyclerView.adapter = Konto_Adapter(db)
 
     }
 

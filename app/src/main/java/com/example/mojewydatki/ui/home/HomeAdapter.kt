@@ -5,12 +5,20 @@ import android.provider.BaseColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.R
+import com.example.mojewydatki.ui.wydatek.Contact
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.pojedynczy_wydatek_row.view.*
 
-class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+object Wydatek{
+    var id = null
+    var tytul = null
+}
+
+class HomeAdapter(val db: SQLiteDatabase, val partItemList: List<Wydatek>, val clickListener: (Wydatek) -> Unit) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -29,6 +37,9 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        //(holder as ViewHolder).bind(partItemList[position], clickListener)
+
         val payTitle = holder.containerView.tytul_wydatku_poj
         val payCategory = holder.containerView.kategoria_wydatku_poj
         val payValue = holder.containerView.kwota_wydatku_poj
@@ -60,5 +71,10 @@ class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.Vie
             payDate.setText(PayDataBase.payDate[position])
     */
     }
-    inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer
+    inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer{
+        fun bind(part: Wydatek, clickListener: (Wydatek) -> Unit) {
+            containerView.tytul_wydatku_poj.text = part.tytul
+            containerView.setOnClickListener { clickListener(part)}
+        }
+    }
 }
