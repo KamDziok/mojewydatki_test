@@ -2,17 +2,29 @@ package com.example.mojewydatki.ui.konto_
 
 
 import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.pojedyncze_konto_row.*
 import kotlinx.android.synthetic.main.pojedyncze_konto_row.view.*
 
-class Konto_Adapter(val db: SQLiteDatabase) : RecyclerView.Adapter<Konto_Adapter.ViewHolder>(){
+class Konto(id: Int, nazwa: String, saldo: Double){
+    var id: Int = 0
+    var nazwaKonta: String = ""
+    var saldo = 0.0
+
+    init{
+        this.id = id
+        this.nazwaKonta = nazwa
+        this.saldo = saldo
+    }
+}
+
+class Konto_Adapter(val db: SQLiteDatabase, val clickListener: ((Konto) -> Unit)?) : RecyclerView.Adapter<Konto_Adapter.ViewHolder>(){
+
+    var listaKont = ArrayList<Konto>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -27,7 +39,6 @@ class Konto_Adapter(val db: SQLiteDatabase) : RecyclerView.Adapter<Konto_Adapter
         val countRow = cursor.count
         cursor.close()
         return countRow
-        //PayDataBase.payTitle.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -39,9 +50,21 @@ class Konto_Adapter(val db: SQLiteDatabase) : RecyclerView.Adapter<Konto_Adapter
             null, null, null)
 
         if(cursor.moveToFirst()){
-            accountName.setText(cursor.getString(1))
-            accountSaldo.setText(cursor.getString(2))
+            var konto = Konto(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2))
+            listaKont.add(konto)
+            if (clickListener != null) {
+                (holder as ViewHolder).bind(listaKont[position], clickListener)
+            }else{
+                holder.containerView.nazwa_kategorii_poj.text = konto.nazwaKonta
+                holder.containerView.bilans_dla_kategorii_oddaty_poj.text = konto.saldo.toString()
+            }
         }
     }
-    inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer
+    inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bind(part: Konto, clickListener: (Konto) -> Unit) {
+            containerView.nazwa_kategorii_poj.text = part.nazwaKonta
+            containerView.bilans_dla_kategorii_oddaty_poj.text = part.saldo.toString()
+            containerView.setOnClickListener { clickListener(part) }
+        }
+    }
 }

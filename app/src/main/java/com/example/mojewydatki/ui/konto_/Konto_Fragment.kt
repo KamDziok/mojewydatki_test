@@ -39,7 +39,7 @@ class Konto_Fragment : Fragment() {
         //Obsluga wyswietlania moich_kont
         val recyclerView: RecyclerView = root.findViewById(R.id.konto_rc)
         recyclerView.layoutManager= LinearLayoutManager(activity)
-        recyclerView.adapter =Konto_Adapter(db)
+        recyclerView.adapter =Konto_Adapter(db, { partItem : Konto -> kontoClicked(partItem) })
 
         btn = root.findViewById<View>(R.id.dodaj_konto) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
@@ -48,6 +48,23 @@ class Konto_Fragment : Fragment() {
         }
 
         return root
+    }
+
+    fun kontoClicked(konto: Konto){
+        var mesage: Toast
+
+        myDialog = Dialog(activity!!)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.fragment_kategorie)
+
+        myDialog.show()
+        val buttonEdit: Button = myDialog.dodaj_konto_button
+        buttonEdit.text = "Edtytuj"
+        val buttonDel: Button = myDialog.anuluj_konto_button
+        buttonDel.text = "Usuń"
+
+        myDialog.konto_nazwa_textedit.setText(konto.nazwaKonta)
+        myDialog.kat_nazwa_textedit.setText(konto.saldo.toString())
     }
 
     fun ShowDialog(){

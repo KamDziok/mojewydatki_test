@@ -28,7 +28,6 @@ class KategorieAdapter(val db: SQLiteDatabase, val clickListener: (Kategoria) ->
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
         val payRow = layoutInflater.inflate(R.layout.pojedynczy_przeglad_row,viewGroup, false)
-        //partItemList.clear()
         return ViewHolder(payRow)
     }
 
@@ -39,7 +38,6 @@ class KategorieAdapter(val db: SQLiteDatabase, val clickListener: (Kategoria) ->
         val countRow = cursor.count
         cursor.close()
         return countRow
-        //PayDataBase.payTitle.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

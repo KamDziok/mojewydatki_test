@@ -36,7 +36,6 @@ class KategorieFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
-        var testData = ArrayList<Kategoria>()
 
         btn = root.findViewById<View>(R.id.dodaj_kategorie) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{

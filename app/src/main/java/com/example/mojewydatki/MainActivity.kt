@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         //Obsluga wyswietlania moich_kont
         val recyclerView: RecyclerView = findViewById(R.id.konto_rc_menu)
         recyclerView.layoutManager= LinearLayoutManager(applicationContext)
-        recyclerView.adapter = Konto_Adapter(db)
+        recyclerView.adapter = Konto_Adapter(db, null)
         return true
     }
 
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         //Obsluga wyswietlania moich_kont
         val recyclerView: RecyclerView = findViewById(R.id.konto_rc_menu)
         recyclerView.layoutManager= LinearLayoutManager(applicationContext)
-        recyclerView.adapter = Konto_Adapter(db)
+        recyclerView.adapter = Konto_Adapter(db, null)
         return true
     }
 
