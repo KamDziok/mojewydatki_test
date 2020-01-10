@@ -25,22 +25,29 @@ android:orientation="vertical">
 
             android:layout_height="25dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="31dp"
             app:srcCompat="@drawable/ic_menu_konto2" />
 
         <TextView
-
+            android:layout_marginTop="5dp"
             android:id="@+id/textView"
             android:layout_width="77dp"
             android:layout_height="30dp"
             android:paddingBottom="14dp"
             android:text="@string/konta"
+            android:textColor="#343434"
             android:textStyle="bold" />
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/konto_rc"
+        android:id="@+id/konto_rc_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

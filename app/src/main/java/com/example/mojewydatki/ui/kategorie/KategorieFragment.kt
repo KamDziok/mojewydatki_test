@@ -40,6 +40,7 @@ class KategorieFragment : Fragment() {
 
         btn = root.findViewById<View>(R.id.dodaj_kategorie) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
+
             ShowDialog()
         }
 
@@ -101,11 +102,9 @@ class KategorieFragment : Fragment() {
             if (!myDialog.kat_nazwa_textedit.text.toString().equals(partItem.nazwaKat) && myDialog.kat_nazwa_textedit.text.isNotEmpty()) {
                 try {
                     val db = PayDataBase(activity!!)
-                    Log.d("Baza", (partItem.id.toString()))
-                    Log.d("Baza", partItem.nazwaKat)
                     db.edytujKategorie(partItem.id, myDialog.kat_nazwa_textedit.text.toString())
-
-
+                    mesage = Toast.makeText(activity!!.applicationContext, "Zedytowano wpis", Toast.LENGTH_SHORT)
+                    myDialog.cancel()
                 } catch (e: Exception) {
                     mesage = Toast.makeText(
                         activity!!.applicationContext,
@@ -128,24 +127,17 @@ class KategorieFragment : Fragment() {
             try {
                 val db = PayDataBase(activity!!)
                 db.usunKategorie(partItem.id)
-
-
+                mesage = Toast.makeText(activity!!.applicationContext, "Usunięto", Toast.LENGTH_SHORT)
+                myDialog.cancel()
             } catch (e: Exception) {
                 mesage = Toast.makeText(
                     activity!!.applicationContext,
                     "Coś poszło nie tak",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 )
                 mesage.show()
             }
         }
-
-        mesage = Toast.makeText(activity!!, "Clicked: ${partItem.id}", Toast.LENGTH_LONG)
-        mesage.show()
-
-
-        mesage = Toast.makeText(activity!!, "Clicked: ${partItem.id}", Toast.LENGTH_LONG)
-        mesage.show()
     }
 
     fun ShowDialog(){
@@ -157,11 +149,7 @@ class KategorieFragment : Fragment() {
 
         txt = myDialog.findViewById<View>(R.id.dodaj_kategorie_button) as TextView
         txt.isEnabled = true
-        txt.setOnClickListener{
 
-            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
-            myDialog.cancel()
-        }
         myDialog.show()
 
         val buttonDodaj: Button = myDialog.findViewById<Button>(R.id.dodaj_kategorie_button)
@@ -178,17 +166,18 @@ class KategorieFragment : Fragment() {
                     val db: PayDataBase = PayDataBase(activity!!)
                     db.dodajKategorie(katNazwa)
 
-                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_LONG)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
                     mesage.show()
 
                     //czyszczenie formularza
                     myDialog.kat_nazwa_textedit.setText("")
+                    myDialog.cancel()
                 }catch (e: Exception){
-                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_LONG)
+                    mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
                     mesage.show()
                 }
             }else{
-                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_LONG)
+                mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
                 mesage.show()
             }
         }

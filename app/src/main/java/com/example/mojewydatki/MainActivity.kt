@@ -57,22 +57,32 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-//        //Obsluga bazy danych
-//        val dbK = PayDataBase (applicationContext)
-//        val db = dbK.writableDatabase
-//
-//        //Obsluga wyswietlania moich_kont
-//        val recyclerView: RecyclerView = findViewById(R.id.konto_rc)
-//        recyclerView.layoutManager= LinearLayoutManager(this)
-//        recyclerView.adapter = Konto_Adapter(db)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        //Obsluga bazy danych
+        val dbK = PayDataBase (applicationContext)
+        val db = dbK.writableDatabase
+        //Obsluga wyswietlania moich_kont
+        val recyclerView: RecyclerView = findViewById(R.id.konto_rc_menu)
+        recyclerView.layoutManager= LinearLayoutManager(applicationContext)
+        recyclerView.adapter = Konto_Adapter(db)
         return true
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        //Obsluga bazy danych
+        val dbK = PayDataBase (applicationContext)
+        val db = dbK.writableDatabase
+        //Obsluga wyswietlania moich_kont
+        val recyclerView: RecyclerView = findViewById(R.id.konto_rc_menu)
+        recyclerView.layoutManager= LinearLayoutManager(applicationContext)
+        recyclerView.adapter = Konto_Adapter(db)
+        return true
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()

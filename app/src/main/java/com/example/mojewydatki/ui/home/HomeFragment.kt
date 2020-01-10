@@ -19,9 +19,9 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.util.Log
 import kotlinx.android.synthetic.main.fragment_wydatek.*
+import java.net.DatagramPacket
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        var testData = ArrayList<Wydatek>()
 
         btn = root.findViewById<View>(R.id.dodaj_wydatek) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
@@ -51,7 +50,7 @@ class HomeFragment : Fragment() {
         //Obsluga wyswietlania moich_wydatkow na stronie glownej
         val recyclerView: RecyclerView= root.findViewById(R.id.recyclerview)
         recyclerView.layoutManager=LinearLayoutManager(activity)
-        recyclerView.adapter =HomeAdapter(db, testData, { partItem : Wydatek -> partItemClicked(partItem) })
+        recyclerView.adapter =HomeAdapter(db)
 
         //Obsluga FloatingActionButton (tego plusa) wyswietlenie
         val fab = activity!!.fab
@@ -70,10 +69,6 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    private fun partItemClicked(partItem : Wydatek) {
-        Toast.makeText(activity!!, "Clicked: ${partItem.tytul}", Toast.LENGTH_LONG).show()
-    }
-
     fun ShowDialog(){
 
         myDialog = Dialog(activity!!)
@@ -83,12 +78,13 @@ class HomeFragment : Fragment() {
 
         txt = myDialog.findViewById<View>(R.id.dodaj_wydatek_button) as TextView
         txt.isEnabled = true
-        txt.setOnClickListener{
 
-            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
+        myDialog.show()
+
+        myDialog.findViewById<View>(R.id.anuluj_wydatek_button)!!.setOnClickListener{
+
             myDialog.cancel()
         }
-        myDialog.show()
 
         val payData = myDialog.findViewById<View>(R.id.payDate_textedit)
         payData.setOnClickListener{
@@ -97,7 +93,7 @@ class HomeFragment : Fragment() {
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             val activity = activity as Context
-            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener{ _, mYear, mMonth, mDay -> payDate_textedit.setText(""+mDay+"."+(mMonth+1)+"."+mYear)}, year,month,day)
+            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay -> payDate_textedit.setText(""+mDay+"."+(mMonth+1)+"."+mYear)}, year,month,day)
             dpd.show()
         }
 
@@ -139,6 +135,7 @@ class HomeFragment : Fragment() {
 
                     mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
                     mesage.show()
+                    myDialog.cancel()
                 }catch (e: Exception) {
                     Log.d("Baza", e.message)
                     mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)

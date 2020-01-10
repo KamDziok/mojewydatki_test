@@ -17,7 +17,7 @@ object Wydatek{
     var tytul = null
 }
 
-class HomeAdapter(val db: SQLiteDatabase, val partItemList: List<Wydatek>, val clickListener: (Wydatek) -> Unit) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+class HomeAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -72,9 +72,5 @@ class HomeAdapter(val db: SQLiteDatabase, val partItemList: List<Wydatek>, val c
     */
     }
     inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer{
-        fun bind(part: Wydatek, clickListener: (Wydatek) -> Unit) {
-            containerView.tytul_wydatku_poj.text = part.tytul
-            containerView.setOnClickListener { clickListener(part)}
-        }
     }
 }
