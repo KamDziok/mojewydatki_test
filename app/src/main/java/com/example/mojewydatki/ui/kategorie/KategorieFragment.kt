@@ -17,7 +17,6 @@ import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
 import android.util.Log
-import com.example.mojewydatki.ui.home.CategoryDataBase
 
 class KategorieFragment : Fragment() {
 

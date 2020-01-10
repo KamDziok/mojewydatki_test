@@ -23,10 +23,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
 import java.text.NumberFormat
 
+class Contact{
+
+    var id: Int = 0
+
+}
 
 class WydatekFragment : Fragment() {
-
-    private lateinit var wydatekViewModel: WydatekViewModel
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -34,8 +37,6 @@ class WydatekFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        wydatekViewModel =
-                ViewModelProviders.of(this).get(WydatekViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
@@ -74,7 +75,12 @@ class WydatekFragment : Fragment() {
                     val db: PayDataBase = PayDataBase(activity!!)
                     val nf = NumberFormat.getInstance()
                     val saldo = nf.parse(saldoString).toDouble()
-                    db.dodajWydatek(title, category, day, saldo, acount, note, radio)
+                    db.dodajKonto(acount, 0.0)
+                    val idKonta = db.getIDKonta(acount)!!.id
+                    db.dodajKategorie(category)
+                    val idKat = db.getIDKat(category)!!.id
+                    db.dodajWydatek2(title, idKat, day, saldo, idKonta, note, radio)
+//                    db.dodajWydatek(title, category, day, saldo, acount, note, radio)
 
                     //czyszczenie formularza
                     activity!!.categoryTitle_textedit.setText("")

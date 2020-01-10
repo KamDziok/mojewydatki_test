@@ -17,7 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
-import com.example.mojewydatki.ui.home.AcountDataBase
 import kotlin.Exception as Exception1
 
 class Konto_add_Fragment : Fragment() {
@@ -45,7 +44,7 @@ class Konto_add_Fragment : Fragment() {
 
             if(title.isNotEmpty() && saldoString.isNotEmpty()){
                 try {
-                    val db = AcountDataBase(activity!!)
+                    val db = PayDataBase(activity!!)
                     val nf = NumberFormat.getInstance()
                     val saldo = nf.parse(saldoString).toDouble()
                     db.dodajKonto(title, saldo)
