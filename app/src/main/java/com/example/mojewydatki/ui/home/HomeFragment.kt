@@ -20,7 +20,7 @@ import android.app.Activity
 
 
 class HomeFragment : Fragment() {
-    internal lateinit var btn : Button
+    internal lateinit var btn : com.google.android.material.floatingactionbutton.FloatingActionButton
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
     @SuppressLint("RestrictedApi")
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        btn = root.findViewById<View>(R.id.dodaj_wydatek) as Button
+         btn = root.findViewById<View>(R.id.dodaj_wydatek) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
 
             ShowDialog()

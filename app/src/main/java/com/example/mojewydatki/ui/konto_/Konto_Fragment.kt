@@ -17,7 +17,7 @@ import com.example.mojewydatki.R
 import com.example.mojewydatki.ui.home.PayDataBase
 
 class Konto_Fragment : Fragment() {
-    internal lateinit var btn : Button
+    internal lateinit var btn : com.google.android.material.floatingactionbutton.FloatingActionButton
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
 
@@ -39,7 +39,7 @@ class Konto_Fragment : Fragment() {
         recyclerView.layoutManager= LinearLayoutManager(activity)
         recyclerView.adapter =Konto_Adapter(db)
 
-        btn = root.findViewById<View>(R.id.dodaj_konto) as Button
+        btn = root.findViewById<View>(R.id.dodaj_konto) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
 
             ShowDialog()

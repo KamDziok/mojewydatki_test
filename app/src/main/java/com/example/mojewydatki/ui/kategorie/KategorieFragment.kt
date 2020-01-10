@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.ui.konto_.Konto_Adapter
 
 class KategorieFragment : Fragment() {
-    internal lateinit var btn : Button
+    internal lateinit var btn : com.google.android.material.floatingactionbutton.FloatingActionButton
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
 
@@ -38,7 +38,7 @@ class KategorieFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
 
-        btn = root.findViewById<View>(R.id.dodaj_kategorie) as Button
+        btn = root.findViewById<View>(R.id.dodaj_kategorie) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
 
             ShowDialog()
