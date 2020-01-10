@@ -1,23 +1,28 @@
 package com.example.mojewydatki.ui.home
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mojewydatki.MainActivity
 import com.example.mojewydatki.R
-import com.example.mojewydatki.ui.wydatek.WydatekFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import android.view.Window
+import android.widget.TextView
+import android.widget.Toast
+import android.app.Activity
+
 
 
 class HomeFragment : Fragment() {
-
+    internal lateinit var btn : Button
+    internal lateinit var myDialog : Dialog
+    internal lateinit var txt : TextView
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +31,12 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+
+        btn = root.findViewById<View>(R.id.dodaj_wydatek) as Button
+        btn.setOnClickListener{
+
+            ShowDialog()
+        }
 
         //Obsluga bazy danych
         val dbH = PayDataBase (activity!!.applicationContext)
@@ -52,4 +63,22 @@ class HomeFragment : Fragment() {
 
         return root
     }
+
+    fun ShowDialog(){
+
+        myDialog = Dialog(activity!!)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.fragment_wydatek)
+
+
+        txt = myDialog.findViewById<View>(R.id.dodaj_wydatek_button) as TextView
+        txt.isEnabled = true
+        txt.setOnClickListener{
+
+            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
+            myDialog.cancel()
+        }
+        myDialog.show()
+    }
+
 }

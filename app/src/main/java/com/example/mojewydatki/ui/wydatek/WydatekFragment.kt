@@ -31,12 +31,14 @@ class Contact{
 
 class WydatekFragment : Fragment() {
 
+
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
@@ -80,7 +82,7 @@ class WydatekFragment : Fragment() {
                     db.dodajKategorie(category)
                     val idKat = db.getIDKat(category)!!.id
                     db.dodajWydatek2(title, idKat, day, saldo, idKonta, note, radio)
-//                    db.dodajWydatek(title, category, day, saldo, acount, note, radio)
+//                    db.dodajWydatek(title, category, day, saldo, acount,
 
                     //czyszczenie formularza
                     activity!!.categoryTitle_textedit.setText("")

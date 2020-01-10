@@ -15,14 +15,14 @@ object TworzenieTabeliWydatek {
         "CREATE TABLE WYDATKI (" +
             "ID_WYDATKU INTEGER PRIMARY KEY," +
             "Tytul TEXT NOT NULL," +
-//            "Kategoria TEXT NOT NULL," +
-                "FOREIGN KEY(ID_KATEGORII) REFERENCES KATEGORIE(ID_KATEGORII)" +
+            "ID_KATEGORII INTEGER NOT NULL," +
             "Data TEXT NOT NULL," +
             "Kwota DOUBLE NOT NULL,"+
-            //"Konto TEXT NOT NULL," +
-                "FOREIGN KEY(ID_KONTA) REFERENCES KONTO(ID_KONTOA)" +
+            "ID_KONTA INTEGER NOT NULL," +
             "Notatka TEXT NOT NULL,"+
-            "Rodzaj INTEGER NOT NULL)"
+            "Rodzaj INTEGER NOT NULL," +
+            "FOREIGN KEY(ID_KATEGORII) REFERENCES KATEGORIE(ID_KATEGORII)," +
+            "FOREIGN KEY(ID_KONTA) REFERENCES KONTO(ID_KONTA))"
 
     const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST WYDATKI"
 }
@@ -43,7 +43,7 @@ object TworzenieTabeliKategori {
     const val SQL_CREATE_TABLE: String =
         "CREATE TABLE KATEGORIE (" +
                 "ID_KATEGORII INTEGER PRIMARY KEY," +
-                "Kategoria TEXT NOT NULL,"
+                "Kategoria TEXT NOT NULL)"
 
     const val SQL_DELETE_TABLE = "DROP TABLE IF EXIST KONTA"
 }
@@ -129,6 +129,19 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         row.put("Kategoria", category)
         db.insertOrThrow("KATEGORIE", null, row)
     }
+
+//    fun getKatSaldo(idKat: Int): Int {
+//        val db = this.writableDatabase
+//        val selectQuery = "SELECT SUM(Kwota) FROM KATEGORIE WHERE WYDATKI = ?"
+//        db.rawQuery(selectQuery, arrayOf(idKat)).use { // .use requires API 16
+//            if (it.moveToFirst()) {
+//                val result = Contact()
+//                result.id = it.getInt(it.getColumnIndex("ID_KATEGORII"))
+//                return result
+//            }
+//        }
+//        return 0
+//    }
 }
 
 /*

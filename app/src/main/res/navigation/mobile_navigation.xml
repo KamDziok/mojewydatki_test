@@ -9,9 +9,8 @@
         android:id="@+id/nav_home"
         android:name="com.example.mojewydatki.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-<!--        android:onClick="navHome"/>-->
-
+        android:onClick="navHome"/>
+    <!--tools:layout="@layout/fragment_home"-->
 
     <fragment
         android:id="@+id/nav_przeglad"
@@ -23,9 +22,8 @@
         android:id="@+id/nav_wydatek"
         android:name="com.example.mojewydatki.ui.wydatek.WydatekFragment"
         android:label="@string/menu_wydatek"
-        tools:layout="@layout/fragment_wydatek" />
-<!--        android:onClick="navWydatek"/>-->
-
+        android:onClick="navWydatek"/>
+    <!--        tools:layout="@layout/fragment_wydatek" />-->
 
     <fragment
         android:id="@+id/nav_konto"
@@ -36,22 +34,20 @@
     <fragment
         android:id="@+id/nav_add_konto"
         android:name="com.example.mojewydatki.ui.konto.Konto_add_Fragment"
-        android:label="@string/dodaj_konto"
+        android:label="@string/menu_konto"
         android:onClick="navadd_Konto"/>
 
     <fragment
         android:id="@+id/nav_kategorie"
         android:name="com.example.mojewydatki.ui.kategorie.KategorieFragment"
         android:label="@string/menu_kategorie"
-        tools:layout="@layout/fragment_kategorie" />
-<!--        android:onClick="navKategorie"/>-->
-
+        android:onClick="navKategorie"/>
+    <!--        tools:layout="@layout/fragment_kategorie" />-->
 
     <fragment
         android:id="@+id/nav_podsumowanie"
         android:name="com.example.mojewydatki.ui.podsumowanie.PodsumowanieFragment"
         android:label="@string/menu_podsumowanie"
-        tools:layout="@layout/fragment_podsumowanie" />
-<!--        android:onClick="navPods"/>-->
-
+        android:onClick="navPods"/>
+    <!--        tools:layout="@layout/fragment_podsumowanie" />-->
 </navigation>

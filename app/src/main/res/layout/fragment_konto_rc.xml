@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentkonto_rc"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+android:id="@+id/fragmentkonto_rc"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/konto_rc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="478dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+<Button
+    android:id="@+id/dodaj_konto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="dodaj konto" />
+
 </LinearLayout>

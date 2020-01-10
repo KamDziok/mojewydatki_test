@@ -1,6 +1,7 @@
 package com.example.mojewydatki.ui.kategorie
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +18,16 @@ import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
 import android.util.Log
+import android.widget.Button
+import android.view.Window
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mojewydatki.ui.konto_.Konto_Adapter
 
 class KategorieFragment : Fragment() {
-
+    internal lateinit var btn : Button
+    internal lateinit var myDialog : Dialog
+    internal lateinit var txt : TextView
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -28,8 +36,22 @@ class KategorieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
         val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
+
+        btn = root.findViewById<View>(R.id.dodaj_kategorie) as Button
+        btn.setOnClickListener{
+
+            ShowDialog()
+        }
+
+        //Obsluga bazy danych
+        val dbK = PayDataBase (activity!!.applicationContext)
+        val db = dbK.writableDatabase
+
+        //Obsluga wyswietlania moich_kategorie
+        val recyclerView: RecyclerView = root.findViewById(R.id.kategorie_rc)
+        recyclerView.layoutManager= LinearLayoutManager(activity)
+        recyclerView.adapter =KategorieAdapter(db)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
         val fab = activity!!.fab as? FloatingActionButton
@@ -59,5 +81,22 @@ class KategorieFragment : Fragment() {
         */
 
         return root
+    }
+
+    fun ShowDialog(){
+
+        myDialog = Dialog(activity!!)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.fragment_kategorie)
+
+
+        txt = myDialog.findViewById<View>(R.id.dodaj_kategorie_button) as TextView
+        txt.isEnabled = true
+        txt.setOnClickListener{
+
+            Toast.makeText(activity!!.applicationContext,"toast", Toast.LENGTH_LONG).show()
+            myDialog.cancel()
+        }
+        myDialog.show()
     }
 }
