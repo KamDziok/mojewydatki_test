@@ -23,8 +23,8 @@
             android:title="@string/menu_kategorie" />
         <item
             android:id="@+id/nav_konto"
-            android:icon="@drawable/ic_menu_wydatek"
-            android:title="Konto" />
+            android:icon="@drawable/ic_menu_konto2"
+            android:title="@string/konta" />
         <item
             android:id="@+id/nav_wydatek"
             android:icon="@drawable/ic_menu_plus"
