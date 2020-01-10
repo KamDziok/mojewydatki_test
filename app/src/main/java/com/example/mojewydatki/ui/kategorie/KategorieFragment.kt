@@ -21,7 +21,6 @@ import com.example.mojewydatki.ui.home.CategoryDataBase
 
 class KategorieFragment : Fragment() {
 
-    private lateinit var kategorieViewModel: KategorieViewModel
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -29,20 +28,15 @@ class KategorieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        kategorieViewModel =
-                ViewModelProviders.of(this).get(KategorieViewModel::class.java)
+
 
         val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
         val fab = activity!!.fab as? FloatingActionButton
         fab!!.visibility = View.INVISIBLE
+
         /*
-        val textView: TextView = root.findViewById(R.id.text_kategorie)
-        kategorieViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        */
         root.findViewById<View>(R.id.dodaj_konto_button)!!.setOnClickListener{    //listener przycisku dodawania konta
             var mesage: Toast
             val title: String = activity!!.categoryTitle_textedit.getText().toString()
@@ -63,6 +57,7 @@ class KategorieFragment : Fragment() {
                 mesage.show()
             }
         }
+        */
 
         return root
     }

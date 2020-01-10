@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class PrzegladFragment : Fragment() {
 
-    private lateinit var przegladViewModel: PrzegladViewModel
+
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -23,8 +23,7 @@ class PrzegladFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        przegladViewModel =
-                ViewModelProviders.of(this).get(PrzegladViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_przeglad, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie

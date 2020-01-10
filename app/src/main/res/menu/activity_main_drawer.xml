@@ -22,25 +22,21 @@
             android:icon="@drawable/ic_menu_kategorie"
             android:title="@string/menu_kategorie" />
         <item
+            android:id="@+id/nav_konto"
+            android:icon="@drawable/ic_menu_wydatek"
+            android:title="Konto" />
+        <item
             android:id="@+id/nav_wydatek"
             android:icon="@drawable/ic_menu_plus"
             android:title="@string/menu_wydatek" />
         <item
-            android:id="@+id/nav_konto"
+            android:id="@+id/nav_add_konto"
             android:icon="@drawable/ic_menu_plus"
             android:title="@string/menu_konto" />
 
 
     </group>
 
-    <item android:title="Konta">
-        <menu>
 
-            <item
-                android:title="Portfel                                          100.02 zł" />
-            <item
-                android:title="mBank                                        4535.30 zł" />
-        </menu>
-    </item>
 
 </menu>

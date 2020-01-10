@@ -1,11 +1,8 @@
 package com.example.mojewydatki
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.Editable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -17,20 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
-import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mojewydatki.ui.home.HomeAdapter
-import com.example.mojewydatki.ui.home.PayDataBase
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_wydatek.*
-import java.util.*
-import java.text.NumberFormat
-import android.widget.Toast
 import com.example.mojewydatki.ui.home.HomeFragment
 import com.example.mojewydatki.ui.kategorie.KategorieFragment
-import com.example.mojewydatki.ui.konto.KontoFragment
+import com.example.mojewydatki.ui.konto.Konto_add_Fragment
 import com.example.mojewydatki.ui.podsumowanie.PodsumowanieFragment
 import com.example.mojewydatki.ui.przeglad.PrzegladFragment
 
@@ -90,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun navKonto(){
-        val fragment_konto = KontoFragment()
+        val fragment_konto = Konto_add_Fragment()
         fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_konto).commit()
     }
 

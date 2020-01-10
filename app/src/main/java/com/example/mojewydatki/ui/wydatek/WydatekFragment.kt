@@ -26,7 +26,7 @@ import java.text.NumberFormat
 
 class WydatekFragment : Fragment() {
 
-    private lateinit var wydatekViewModel: WydatekViewModel
+
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -34,8 +34,7 @@ class WydatekFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        wydatekViewModel =
-                ViewModelProviders.of(this).get(WydatekViewModel::class.java)
+
 
         val root = inflater.inflate(R.layout.fragment_wydatek, container, false)
 

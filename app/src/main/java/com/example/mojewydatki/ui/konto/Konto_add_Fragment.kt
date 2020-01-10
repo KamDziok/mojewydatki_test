@@ -18,10 +18,11 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
 import com.example.mojewydatki.ui.home.AcountDataBase
+import kotlin.Exception as Exception1
 
-class KontoFragment : Fragment() {
+class Konto_add_Fragment : Fragment() {
 
-    private lateinit var kontoViewModel: KontoViewModel
+
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -29,19 +30,13 @@ class KontoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        kontoViewModel =
-                ViewModelProviders.of(this).get(KontoViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_konto, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
         val fab = activity!!.fab as? FloatingActionButton
         fab!!.visibility = View.INVISIBLE
 
-     //   val textView: TextView = root.findViewById(R.id.text_konto)
-     //   kontoViewModel.text.observe(this, Observer {
-     //       textView.text = it
-     //   }
-        //)
 
         root.findViewById<View>(R.id.dodaj_konto_button)!!.setOnClickListener{    //listener przycisku dodawania konta
             var mesage: Toast

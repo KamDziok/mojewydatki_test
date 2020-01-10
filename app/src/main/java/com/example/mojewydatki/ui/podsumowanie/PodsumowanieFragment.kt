@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class PodsumowanieFragment : Fragment() {
 
-    private lateinit var podsumowanieViewModel: PodsumowanieViewModel
+
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -23,8 +23,7 @@ class PodsumowanieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        podsumowanieViewModel =
-                ViewModelProviders.of(this).get(PodsumowanieViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_podsumowanie, container, false)
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
