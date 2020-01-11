@@ -103,6 +103,7 @@ class KategorieFragment : Fragment() {
                     val db = PayDataBase(activity!!)
                     db.edytujKategorie(partItem.id, myDialog.kat_nazwa_textedit.text.toString())
                     mesage = Toast.makeText(activity!!.applicationContext, "Zedytowano wpis", Toast.LENGTH_SHORT)
+                    mesage.show()
                     myDialog.cancel()
                 } catch (e: Exception) {
                     mesage = Toast.makeText(
@@ -127,6 +128,7 @@ class KategorieFragment : Fragment() {
                 val db = PayDataBase(activity!!)
                 db.usunKategorie(partItem.id)
                 mesage = Toast.makeText(activity!!.applicationContext, "Usunięto", Toast.LENGTH_SHORT)
+                mesage.show()
                 myDialog.cancel()
             } catch (e: Exception) {
                 mesage = Toast.makeText(

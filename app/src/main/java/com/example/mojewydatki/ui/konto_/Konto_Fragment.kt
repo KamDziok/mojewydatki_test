@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.R
 import com.example.mojewydatki.ui.home.PayDataBase
 import kotlinx.android.synthetic.main.fragment_konto.*
+import kotlinx.android.synthetic.main.fragment_konto.kat_nazwa_textedit
+import kotlinx.android.synthetic.main.fragment_konto.konto_nazwa_textedit
+import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.text.NumberFormat
 
 class Konto_Fragment : Fragment() {
@@ -55,7 +58,7 @@ class Konto_Fragment : Fragment() {
 
         myDialog = Dialog(activity!!)
         myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        myDialog.setContentView(R.layout.fragment_kategorie)
+        myDialog.setContentView(R.layout.fragment_konto)
 
         myDialog.show()
         val buttonEdit: Button = myDialog.dodaj_konto_button
@@ -64,7 +67,51 @@ class Konto_Fragment : Fragment() {
         buttonDel.text = "Usuń"
 
         myDialog.konto_nazwa_textedit.setText(konto.nazwaKonta)
+
+        buttonEdit.setOnClickListener {
+            if (!myDialog.konto_nazwa_textedit.text.toString().equals(konto.nazwaKonta) && myDialog.konto_nazwa_textedit.text.isNotEmpty()) {
+                try {
+                    val db = PayDataBase(activity!!)
+                    db.edytujKonto(konto.id, myDialog.konto_nazwa_textedit.text.toString())
+                    mesage = Toast.makeText(activity!!.applicationContext, "Zedytowano wpis", Toast.LENGTH_SHORT)
+                    mesage.show()
+                    myDialog.cancel()
+                } catch (e: Exception) {
+                    mesage = Toast.makeText(
+                        activity!!.applicationContext,
+                        "Coś poszło nie tak",
+                        Toast.LENGTH_LONG
+                    )
+                    mesage.show()
+                }
+            } else {
+                mesage = Toast.makeText(
+                    activity!!.applicationContext,
+                    "Nie zmieniłeś żadnych danych",
+                    Toast.LENGTH_LONG
+                )
+                mesage.show()
+            }
+        }
+
         myDialog.kat_nazwa_textedit.setText(konto.saldo.toString())
+
+        buttonDel.setOnClickListener{
+            try {
+                val db = PayDataBase(activity!!)
+                db.usunKonto(konto.id)
+                mesage = Toast.makeText(activity!!.applicationContext, "Usunięto", Toast.LENGTH_SHORT)
+                mesage.show()
+                myDialog.cancel()
+            } catch (e: Exception) {
+                mesage = Toast.makeText(
+                    activity!!.applicationContext,
+                    "Coś poszło nie tak",
+                    Toast.LENGTH_SHORT
+                )
+                mesage.show()
+            }
+        }
     }
 
     fun ShowDialog(){
