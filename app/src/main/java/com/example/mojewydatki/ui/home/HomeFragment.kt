@@ -18,7 +18,14 @@ import android.widget.Toast
 import android.app.DatePickerDialog
 import android.content.Context
 import android.util.Log
+import com.example.mojewydatki.ui.kategorie.Kategoria
+import com.example.mojewydatki.ui.kategorie.KategorieAdapter
+import com.example.mojewydatki.ui.konto_.Konto
+import com.example.mojewydatki.ui.konto_.Konto_Adapter
+import kotlinx.android.synthetic.main.fragment_konto.*
 import kotlinx.android.synthetic.main.fragment_wydatek.*
+import kotlinx.android.synthetic.main.fragment_wydatek.kat_nazwa_textedit
+import kotlinx.android.synthetic.main.fragment_wydatek.konto_nazwa_textedit
 import java.net.DatagramPacket
 import java.text.NumberFormat
 import java.util.*
@@ -26,8 +33,14 @@ import java.util.*
 
 class HomeFragment : Fragment() {
     internal lateinit var btn : com.google.android.material.floatingactionbutton.FloatingActionButton
+    internal lateinit var btn2 : com.google.android.material.floatingactionbutton.FloatingActionButton
+    internal lateinit var btn3 : com.google.android.material.floatingactionbutton.FloatingActionButton
     internal lateinit var myDialog : Dialog
+    internal lateinit var myDialog2 : Dialog
+    internal lateinit var myDialog3 : Dialog
     internal lateinit var txt : TextView
+    internal lateinit var txt2 : TextView
+    internal lateinit var txt3 : TextView
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +79,54 @@ class HomeFragment : Fragment() {
 //            fm.beginTransaction().replace(R.id.nav_host_fragment, fragment_wydatek).commit()
 //        }
 
+
         return root
+    }
+    //popup z wyborem kategorii w wydatkach
+    fun ShowDialog2(){
+
+        myDialog2 = Dialog(activity!!)
+        myDialog2.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog2.setContentView(R.layout.fragment_kategorie_rc)
+        //Obsluga bazy danych
+        val dbK = PayDataBase (activity!!.applicationContext)
+        val db = dbK.writableDatabase
+
+        //Obsluga wyswietlania moich_kategorie
+
+        val recyclerView: RecyclerView = myDialog2.findViewById(R.id.kategorie_rc)
+        recyclerView.layoutManager= LinearLayoutManager(activity)
+        recyclerView.adapter =KategorieAdapter(db, { partItem : Kategoria -> partItemClicked(partItem) })
+
+
+        txt2 = myDialog.findViewById<View>(R.id.payCategory_textedit) as TextView
+        txt2.isEnabled = true
+        btn2 = myDialog2.findViewById<View>(R.id.dodaj_kategorie) as com.google.android.material.floatingactionbutton.FloatingActionButton
+        btn2.hide()
+        myDialog2.show()
+
+    }
+    //popup z wyborem kont w wydatkach
+    fun ShowDialog3(){
+
+        myDialog3 = Dialog(activity!!)
+        myDialog3.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog3.setContentView(R.layout.fragment_konto_rc)
+        //Obsluga bazy danych
+        val dbK = PayDataBase (activity!!.applicationContext)
+        val db = dbK.writableDatabase
+
+        val recyclerView: RecyclerView = myDialog3.findViewById(R.id.konto_rc)
+        recyclerView.layoutManager= LinearLayoutManager(activity)
+        recyclerView.adapter = Konto_Adapter(db, { partItem : Konto -> kontoClicked(partItem) })
+
+
+        txt3 = myDialog.findViewById<View>(R.id.payKonto_textedit) as TextView
+        txt3.isEnabled = true
+        btn3 = myDialog3.findViewById<View>(R.id.dodaj_konto) as com.google.android.material.floatingactionbutton.FloatingActionButton
+        btn3.hide()
+        myDialog3.show()
+
     }
 
     fun ShowDialog(){
@@ -81,6 +141,15 @@ class HomeFragment : Fragment() {
 
         myDialog.show()
 
+        myDialog.findViewById<View>(R.id.payCategory_textedit)!!.setOnClickListener{
+
+            ShowDialog2()
+        }
+
+        myDialog.findViewById<View>(R.id.payKonto_textedit)!!.setOnClickListener{
+
+            ShowDialog3()
+        }
         myDialog.findViewById<View>(R.id.anuluj_wydatek_button)!!.setOnClickListener{
 
             myDialog.cancel()
@@ -147,5 +216,62 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    private fun partItemClicked(partItem : Kategoria) {
+        var mesage: Toast
 
+        myDialog = Dialog(activity!!)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.fragment_kategorie)
+
+        myDialog.show()
+        val buttonEdit: Button = myDialog.findViewById<Button>(R.id.dodaj_kategorie_button)
+        buttonEdit.text = "Edtytuj"
+        val buttonDel: Button = myDialog.findViewById<Button>(R.id.anuluj_kategorie_button)
+        buttonDel.text = "Usuń"
+
+        myDialog.kat_nazwa_textedit.setText(partItem.nazwaKat)
+
+        buttonEdit.setOnClickListener {
+            if (!myDialog.kat_nazwa_textedit.text.toString().equals(partItem.nazwaKat) && myDialog.kat_nazwa_textedit.text.isNotEmpty()) {
+                try {
+                    val db = PayDataBase(activity!!)
+                    db.edytujKategorie(partItem.id, myDialog.kat_nazwa_textedit.text.toString())
+                    mesage = Toast.makeText(activity!!.applicationContext, "Zedytowano wpis", Toast.LENGTH_SHORT)
+                    myDialog.cancel()
+                } catch (e: Exception) {
+                    mesage = Toast.makeText(
+                        activity!!.applicationContext,
+                        "Coś poszło nie tak",
+                        Toast.LENGTH_LONG
+                    )
+                    mesage.show()
+                }
+            } else {
+                mesage = Toast.makeText(
+                    activity!!.applicationContext,
+                    "Nie zmieniłeś żadnych danych",
+                    Toast.LENGTH_LONG
+                )
+                mesage.show()
+            }
+        }
+
+}
+
+    fun kontoClicked(konto: Konto){
+        var mesage: Toast
+
+        myDialog = Dialog(activity!!)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.fragment_konto_rc)
+
+        myDialog.show()
+        val buttonEdit: Button = myDialog.dodaj_konto_button
+        buttonEdit.text = "Edtytuj"
+        val buttonDel: Button = myDialog.anuluj_konto_button
+        buttonDel.text = "Usuń"
+
+        myDialog.konto_nazwa_textedit.setText(konto.nazwaKonta)
+        myDialog.kat_nazwa_textedit.setText(konto.saldo.toString())
+    }
 }

@@ -30,6 +30,7 @@
     <string name="kategorie_nazwa_kategorii">Nazwa kategorii</string>
     <string name="podsumowanie_nw">Najwięcej wydatków w kategorii</string>
     <string name="podaj_date">kliknij by wybrać datę</string>
-    <string name="dodaj_konto">kliknij by wybrać datę</string>
+    <string name="dodaj_konto">kliknij by wybrać konto</string>
+    <string name="dodaj_kategorie">kliknij by wybrać kategorię</string>
 
 </resources>
