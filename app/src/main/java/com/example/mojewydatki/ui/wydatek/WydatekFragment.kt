@@ -2,6 +2,7 @@ package com.example.mojewydatki.ui.wydatek
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,17 @@ import kotlinx.android.synthetic.main.fragment_wydatek.*
 import java.util.*
 import android.content.Context
 import android.util.Log
+import android.view.Window
+import android.widget.Button
 import android.widget.Toast
 import com.example.mojewydatki.ui.home.PayDataBase
+import com.example.mojewydatki.ui.home.Wydatek
+import com.example.mojewydatki.ui.kategorie.Kategoria
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_konto.*
+import kotlinx.android.synthetic.main.fragment_wydatek.kat_nazwa_textedit
+import kotlinx.android.synthetic.main.fragment_wydatek.konto_nazwa_textedit
 import java.text.NumberFormat
 
 class Contact{
@@ -105,4 +113,66 @@ class WydatekFragment : Fragment() {
       //  })
         return root
     }
+
+//    fun wydatekClicked(wydatek: Wydatek){
+//        var mesage: Toast
+//
+//        myDialog = Dialog(activity!!)
+//        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        myDialog.setContentView(R.layout.fragment_wydatek)
+//
+//        myDialog.show()
+//        val buttonEdit: Button = myDialog.dodaj_wydatek_button
+//        buttonEdit.text = "Edtytuj"
+//        val buttonDel: Button = myDialog.anuluj_wydatek_button
+//        buttonDel.text = "Usuń"
+//
+//        myDialog.wydatek_nazwa_textedit.setText(wydatek.nazwaWydatku)
+//
+//        buttonEdit.setOnClickListener {
+//            if (!myDialog.konto_nazwa_textedit.text.toString().equals(wydatek.nazwaKonta) && myDialog.konto_nazwa_textedit.text.isNotEmpty()) {
+//                try {
+//                    val db = PayDataBase(activity!!)
+//                    db.edytujKonto(wydatek.id, myDialog.konto_nazwa_textedit.text.toString())
+//                    mesage = Toast.makeText(activity!!.applicationContext, "Zedytowano wpis", Toast.LENGTH_SHORT)
+//                    mesage.show()
+//                    myDialog.cancel()
+//                } catch (e: Exception) {
+//                    mesage = Toast.makeText(
+//                        activity!!.applicationContext,
+//                        "Coś poszło nie tak",
+//                        Toast.LENGTH_LONG
+//                    )
+//                    mesage.show()
+//                }
+//            } else {
+//                mesage = Toast.makeText(
+//                    activity!!.applicationContext,
+//                    "Nie zmieniłeś żadnych danych",
+//                    Toast.LENGTH_LONG
+//                )
+//                mesage.show()
+//            }
+//        }
+//
+//        myDialog.kat_nazwa_textedit.setText(konto.saldo.toString())
+//
+//        buttonDel.setOnClickListener{
+//            try {
+//                val db = PayDataBase(activity!!)
+//                db.usunKonto(konto.id)
+//                mesage = Toast.makeText(activity!!.applicationContext, "Usunięto", Toast.LENGTH_SHORT)
+//                mesage.show()
+//                myDialog.cancel()
+//            } catch (e: Exception) {
+//                mesage = Toast.makeText(
+//                    activity!!.applicationContext,
+//                    "Coś poszło nie tak",
+//                    Toast.LENGTH_SHORT
+//                )
+//                mesage.show()
+//            }
+//        }
+//    }
+
 }
