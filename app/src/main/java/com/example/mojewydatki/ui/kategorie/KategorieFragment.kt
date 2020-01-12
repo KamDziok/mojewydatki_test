@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_konto.*
 import java.text.NumberFormat
 import android.widget.Button
 import android.view.Window
+import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_kategorie.*
@@ -28,6 +29,10 @@ class KategorieFragment : Fragment() {
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
 
+    internal lateinit var root: View
+    internal lateinit var recyclerView: RecyclerView
+    internal lateinit var adapter: KategorieAdapter
+
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +40,7 @@ class KategorieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
+        root = inflater.inflate(R.layout.fragment_kategorie_rc, container, false)
 
         btn = root.findViewById<View>(R.id.dodaj_kategorie) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
@@ -46,11 +51,14 @@ class KategorieFragment : Fragment() {
         //Obsluga bazy danych
         val dbK = PayDataBase (activity!!.applicationContext)
         val db = dbK.writableDatabase
+        adapter = KategorieAdapter(db, { partItem : Kategoria -> partItemClicked(partItem) })
 
         //Obsluga wyswietlania moich_kategorie
-        val recyclerView: RecyclerView = root.findViewById(R.id.kategorie_rc)
+        recyclerView = root.findViewById(R.id.kategorie_rc)
         recyclerView.layoutManager= LinearLayoutManager(activity)
-        recyclerView.adapter =KategorieAdapter(db, { partItem : Kategoria -> partItemClicked(partItem) })
+        adapter.clearList()
+        recyclerView.adapter = adapter
+        adapter.zerujPrintId()
 
         //Obsluga FloatingActionButton (tego plusa) ukrycie
         val fab = activity!!.fab as? FloatingActionButton
@@ -121,6 +129,9 @@ class KategorieFragment : Fragment() {
                 )
                 mesage.show()
             }
+            adapter.clearList()
+            recyclerView.adapter = adapter
+            adapter.zerujPrintId()
         }
 
         buttonDel.setOnClickListener{
@@ -138,6 +149,9 @@ class KategorieFragment : Fragment() {
                 )
                 mesage.show()
             }
+            adapter.clearList()
+            recyclerView.adapter = adapter
+            adapter.zerujPrintId()
         }
     }
 
@@ -181,6 +195,12 @@ class KategorieFragment : Fragment() {
                 mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
                 mesage.show()
             }
+            adapter.clearList()
+            recyclerView.adapter = adapter
+            adapter.zerujPrintId()
+        }
+        buttonAnuluj.setOnClickListener{
+            myDialog.cancel()
         }
     }
 }

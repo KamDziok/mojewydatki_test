@@ -26,6 +26,10 @@ class Konto_Fragment : Fragment() {
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
 
+    internal lateinit var root: View
+    internal lateinit var recyclerView: RecyclerView
+    internal lateinit var adapter: Konto_Adapter
+
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,16 +37,19 @@ class Konto_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_konto_rc, container, false)
+        root = inflater.inflate(R.layout.fragment_konto_rc, container, false)
 
         //Obsluga bazy danych
         val dbK = PayDataBase (activity!!.applicationContext)
         val db = dbK.writableDatabase
 
         //Obsluga wyswietlania moich_kont
-        val recyclerView: RecyclerView = root.findViewById(R.id.konto_rc)
+        recyclerView = root.findViewById(R.id.konto_rc)
         recyclerView.layoutManager= LinearLayoutManager(activity)
-        recyclerView.adapter =Konto_Adapter(db, { partItem : Konto -> kontoClicked(partItem) })
+        adapter = Konto_Adapter(db, { partItem : Konto -> kontoClicked(partItem) })
+        adapter.clearList()
+        recyclerView.adapter = adapter
+        adapter.zerujPrintId()
 
         btn = root.findViewById<View>(R.id.dodaj_konto) as com.google.android.material.floatingactionbutton.FloatingActionButton
         btn.setOnClickListener{
@@ -65,16 +72,20 @@ class Konto_Fragment : Fragment() {
         buttonEdit.text = "Edtytuj"
         val buttonDel: Button = myDialog.anuluj_konto_button
         buttonDel.text = "Usuń"
+        myDialog.kat_nazwa_textedit.visibility = View.INVISIBLE
+        val saldoTV = myDialog.findViewById<TextView>(R.id.konto_saldop_textView)
+        saldoTV.visibility = View.INVISIBLE
 
         myDialog.konto_nazwa_textedit.setText(konto.nazwaKonta)
 
         buttonEdit.setOnClickListener {
-            if (!myDialog.konto_nazwa_textedit.text.toString().equals(konto.nazwaKonta) && myDialog.konto_nazwa_textedit.text.isNotEmpty()) {
+            if (!myDialog.konto_nazwa_textedit.text.toString().equals(konto.nazwaKonta) && myDialog.konto_nazwa_textedit.text.isNotEmpty()){
                 try {
                     val db = PayDataBase(activity!!)
                     db.edytujKonto(konto.id, myDialog.konto_nazwa_textedit.text.toString())
                     mesage = Toast.makeText(activity!!.applicationContext, "Zedytowano wpis", Toast.LENGTH_SHORT)
                     mesage.show()
+
                     myDialog.cancel()
                 } catch (e: Exception) {
                     mesage = Toast.makeText(
@@ -92,6 +103,9 @@ class Konto_Fragment : Fragment() {
                 )
                 mesage.show()
             }
+            adapter.clearList()
+            recyclerView.adapter = adapter
+            adapter.zerujPrintId()
         }
 
         myDialog.kat_nazwa_textedit.setText(konto.saldo.toString())
@@ -102,6 +116,7 @@ class Konto_Fragment : Fragment() {
                 db.usunKonto(konto.id)
                 mesage = Toast.makeText(activity!!.applicationContext, "Usunięto", Toast.LENGTH_SHORT)
                 mesage.show()
+
                 myDialog.cancel()
             } catch (e: Exception) {
                 mesage = Toast.makeText(
@@ -111,7 +126,13 @@ class Konto_Fragment : Fragment() {
                 )
                 mesage.show()
             }
+            adapter.clearList()
+            recyclerView.adapter = adapter
+            adapter.zerujPrintId()
         }
+        adapter.clearList()
+        recyclerView.adapter = adapter
+        adapter.zerujPrintId()
     }
 
     fun ShowDialog(){
@@ -123,6 +144,11 @@ class Konto_Fragment : Fragment() {
 
         txt = myDialog.findViewById<View>(R.id.dodaj_konto_button) as TextView
         txt.isEnabled = true
+
+        myDialog.kat_nazwa_textedit.visibility = View.VISIBLE
+        val saldoTV = myDialog.findViewById<TextView>(R.id.konto_saldop_textView)
+        saldoTV.visibility = View.VISIBLE
+
         myDialog.show()
         myDialog.findViewById<View>(R.id.anuluj_konto_button)!!.setOnClickListener{
 
@@ -147,6 +173,11 @@ class Konto_Fragment : Fragment() {
                     //czyszczenie formularza
                     myDialog.konto_nazwa_textedit.setText("")
                     myDialog.kat_nazwa_textedit.setText("")
+
+                    adapter.clearList()
+                    recyclerView.adapter = adapter
+                    adapter.zerujPrintId()
+
                     myDialog.cancel()
                 }catch (e: Exception){
                     mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_LONG)

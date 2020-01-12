@@ -4,9 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
-import android.text.Editable
-import androidx.core.content.contentValuesOf
+import com.example.mojewydatki.ui.kategorie.Kategoria
+import com.example.mojewydatki.ui.konto_.Konto
 import com.example.mojewydatki.ui.wydatek.Contact
 
 object WydatekInfo{
@@ -112,6 +111,8 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         row.put("Tytul", title)
         row.put("ID_KATEGORII", category)
         db.insertOrThrow("WYDATKI", null, row)
+        var konto = getKontoByID(acount)
+        edytujSaldoKonta(konto!!.id, (konto!!.saldo - value))
     }
 
     fun usunWydatek(idWydatku: Int): Boolean{
@@ -136,6 +137,40 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         return Integer.parseInt("$_success") != -1
     }
 
+    fun getAllWydatki():ArrayList<Wydatek>{
+        var list = ArrayList<Wydatek>()
+        val db = this.writableDatabase
+        val selectQuery = "SELECT  * FROM  ${WydatekInfo.TABLE_NAME} "
+        try {
+            val cursor = db.rawQuery(selectQuery, null)
+            try { // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        var kategorie = getKategoriaById(cursor.getInt(2))
+                        var konto = getKontoByID(cursor.getInt(5))
+                        val wydatek = Wydatek(cursor.getInt(0), cursor.getString(1), cursor.getString(3),
+                            cursor.getDouble(4), cursor.getString(6), cursor.getInt(7))
+                        wydatek.setKategoria(kategorie!!)
+                        wydatek.setKonto(konto!!)
+                        list.add(wydatek)
+                    } while (cursor.moveToNext())
+                }
+            } finally {
+                try {
+                    cursor.close()
+                } catch (ignore: Exception) {
+                }
+            }
+        } finally {
+            try {
+                db.close()
+            } catch (ignore: Exception) {
+            }
+        }
+
+        return list
+    }
+
     fun getIDWydatku(name: String): Contact? {
         val db = this.writableDatabase
         val selectQuery = "SELECT  ID_WYDATKU FROM WYDATKI WHERE Tytul = ?"
@@ -156,19 +191,6 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
             if (it.moveToFirst()) {
                 val result = Contact()
                 result.id = it.getInt(it.getColumnIndex("ID_KONTA"))
-                return result
-            }
-        }
-        return null
-    }
-
-    fun getIDKat(name: String): Contact? {
-        val db = this.writableDatabase
-        val selectQuery = "SELECT  ID_KATEGORII FROM KATEGORIE WHERE Kategoria = ?"
-        db.rawQuery(selectQuery, arrayOf(name)).use { // .use requires API 16
-            if (it.moveToFirst()) {
-                val result = Contact()
-                result.id = it.getInt(it.getColumnIndex("ID_KATEGORII"))
                 return result
             }
         }
@@ -199,6 +221,28 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         return Integer.parseInt("$_success") != -1
     }
 
+    fun edytujSaldoKonta(idKonta: Int, saldo: Double): Boolean{
+        val db = this.writableDatabase
+        val value = ContentValues()
+        value.put(KontoInfo.TABLE_COLUMN_SALDO, saldo)
+        val _success = db.update(KontoInfo.TABLE_NAME, value, KontoInfo.TABLE_COLUMN_ID + "=?", arrayOf(idKonta.toString())).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
+
+    fun getKontoByID(id: Int): Konto?{
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${KontoInfo.TABLE_COLUMN_ID}, ${KontoInfo.TABLE_COLUMN_KONTO}, ${KontoInfo.TABLE_COLUMN_SALDO}" +
+                " FROM ${KontoInfo.TABLE_NAME} WHERE ${KontoInfo.TABLE_COLUMN_ID} = ?"
+        db.rawQuery(selectQuery, arrayOf(id.toString())).use {
+            if (it.moveToFirst()) {
+                var result = Konto(it.getInt(it.getColumnIndex(KontoInfo.TABLE_COLUMN_ID)), it.getString(it.getColumnIndex(KontoInfo.TABLE_COLUMN_KONTO)), it.getDouble(it.getColumnIndex(KontoInfo.TABLE_COLUMN_SALDO)))
+                return result
+            }
+        }
+        return null
+    }
+
     fun dodajKategorie(category: String){
         val db: SQLiteDatabase = getWritableDatabase()
         val row: ContentValues = ContentValues()
@@ -220,6 +264,61 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         val _success = db.update(KategorieInfo.TABLE_NAME, value, KategorieInfo.TABLE_COLUMN_ID + "=?", arrayOf(idKat.toString())).toLong()
         db.close()
         return Integer.parseInt("$_success") != -1
+    }
+
+    fun getKategoriaById(id: Int): Kategoria?{
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${KategorieInfo.TABLE_COLUMN_ID}, ${KategorieInfo.TABLE_COLUMN_KATEGORIA}" +
+                " FROM ${KategorieInfo.TABLE_NAME} WHERE ${KategorieInfo.TABLE_COLUMN_ID} = ?"
+        db.rawQuery(selectQuery, arrayOf(id.toString())).use {
+            if (it.moveToFirst()) {
+                var result = Kategoria(it.getInt(it.getColumnIndex(KategorieInfo.TABLE_COLUMN_ID)), it.getString(it.getColumnIndex(KategorieInfo.TABLE_COLUMN_KATEGORIA)))
+                return result
+            }
+        }
+        return null
+    }
+
+    fun getIDKat(name: String): Contact? {
+        val db = this.writableDatabase
+        val selectQuery = "SELECT  ID_KATEGORII FROM KATEGORIE WHERE Kategoria = ?"
+        db.rawQuery(selectQuery, arrayOf(name)).use { // .use requires API 16
+            if (it.moveToFirst()) {
+                val result = Contact()
+                result.id = it.getInt(it.getColumnIndex("ID_KATEGORII"))
+                return result
+            }
+        }
+        return null
+    }
+
+    fun getAllKat(): ArrayList<Kategoria>{
+        var list = ArrayList<Kategoria>()
+        val db = this.writableDatabase
+        val selectQuery = "SELECT  * FROM  ${KategorieInfo.TABLE_NAME} "
+        try {
+            val cursor = db.rawQuery(selectQuery, null)
+            try { // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        val kategoria = Kategoria(cursor.getInt(0), cursor.getString(1))
+                        list.add(kategoria)
+                    } while (cursor.moveToNext())
+                }
+            } finally {
+                try {
+                    cursor.close()
+                } catch (ignore: Exception) {
+                }
+            }
+        } finally {
+            try {
+                db.close()
+            } catch (ignore: Exception) {
+            }
+        }
+
+        return list
     }
 
 //    fun getKatSaldo(idKat: Int): Int {
