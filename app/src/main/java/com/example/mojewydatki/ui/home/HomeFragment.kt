@@ -108,6 +108,9 @@ class HomeFragment : Fragment() {
         myDialog.anuluj_wydatek_button.text = "Usuń"
         myDialog.dodaj_wydatek_button.text = "Edytuj"
 
+        konto = wydatek.getKonto()
+        kategoia = wydatek.getKategoria()
+
         txt = myDialog.findViewById<View>(R.id.dodaj_wydatek_button) as TextView
         txt.isEnabled = true
 
