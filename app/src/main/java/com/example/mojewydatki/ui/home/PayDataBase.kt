@@ -87,20 +87,7 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         onCreate(db)
     }
 
-//    fun dodajWydatek(title: String, category: String, date: String, value: Double, acount: String, note: String, radio: Int){
-//        val db: SQLiteDatabase = getWritableDatabase()
-//        val row: ContentValues = ContentValues()
-//        row.put("Rodzaj", radio)
-//        row.put("Notatka", note)
-//        row.put("Data", date)
-//        row.put("Konto", acount)
-//        row.put("Kwota", value)
-//        row.put("Tytul", title)
-//        row.put("Kategoria", category)
-//        db.insertOrThrow("WYDATKI", null, row)
-//    }
-
-    fun dodajWydatek2(title: String, category: Int, date: String, value: Double, acount: Int, note: String, radio: Int){
+    fun dodajWydatek(title: String, category: Int, date: String, value: Double, acount: Int, note: String, radio: Int){
         val db: SQLiteDatabase = getWritableDatabase()
         val row: ContentValues = ContentValues()
         row.put("Rodzaj", radio)
@@ -112,12 +99,14 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         row.put("ID_KATEGORII", category)
         db.insertOrThrow("WYDATKI", null, row)
         var konto = getKontoByID(acount)
-        edytujSaldoKonta(konto!!.id, (konto!!.saldo - value))
+        edytujSaldoKonta(konto!!.id, (konto!!.saldo + value))
     }
 
-    fun usunWydatek(idWydatku: Int): Boolean{
+    fun usunWydatek(idWydatku: Int, idKonta: Int, kwota: Double): Boolean{
         val db = this.writableDatabase
         val _success = db.delete(WydatekInfo.TABLE_NAME, WydatekInfo.TABLE_COLUMN_ID + "=?", arrayOf(idWydatku.toString())).toLong()
+        val konto = getKontoByID(idKonta)
+        edytujSaldoKonta(konto!!.id, konto!!.saldo - kwota)
         db.close()
         return Integer.parseInt("$_success") != -1
     }
@@ -136,6 +125,19 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         db.close()
         return Integer.parseInt("$_success") != -1
     }
+
+//    fun getWydatekByID(id: Int): Wydatek?{
+//        val db = this.writableDatabase
+//        val selectQuery = "SELECT ${WydatekInfo.TABLE_COLUMN_ID}, ${WydatekInfo.Ta}, ${KontoInfo.TABLE_COLUMN_SALDO}" +
+//                " FROM ${KontoInfo.TABLE_NAME} WHERE ${KontoInfo.TABLE_COLUMN_ID} = ?"
+//        db.rawQuery(selectQuery, arrayOf(id.toString())).use {
+//            if (it.moveToFirst()) {
+//                var result = Konto(it.getInt(it.getColumnIndex(KontoInfo.TABLE_COLUMN_ID)), it.getString(it.getColumnIndex(KontoInfo.TABLE_COLUMN_KONTO)), it.getDouble(it.getColumnIndex(KontoInfo.TABLE_COLUMN_SALDO)))
+//                return result
+//            }
+//        }
+//        return null
+//    }
 
     fun getAllWydatki():ArrayList<Wydatek>{
         var list = ArrayList<Wydatek>()

@@ -111,6 +111,18 @@ class HomeFragment : Fragment() {
         txt = myDialog.findViewById<View>(R.id.dodaj_wydatek_button) as TextView
         txt.isEnabled = true
 
+        //ladowanie forularza
+        myDialog.kat_nazwa_textedit.setText(wydatek.tytul)
+        myDialog.konto_nazwa_textedit.setText(wydatek.kwota.toString())
+        myDialog.payCategory_textedit.setText(wydatek.getKategoria().nazwaKat)
+        myDialog.payDate_textedit.setText(wydatek.data)
+        myDialog.payKonto_textedit.setText(wydatek.getKonto().nazwaKonta)
+        myDialog.payNotatka_textedit.setText(wydatek.notatka)
+        if(wydatek.rodzaj == 0)
+            myDialog.radioGroup.check(R.id.radioButton_wplyw)
+        else
+            myDialog.radioGroup.check(R.id.radioButton_wydatek)
+
         myDialog.show()
 
         myDialog.findViewById<View>(R.id.payCategory_textedit)!!.setOnClickListener{
@@ -124,7 +136,7 @@ class HomeFragment : Fragment() {
         }
         myDialog.findViewById<View>(R.id.anuluj_wydatek_button)!!.setOnClickListener{
             val db: PayDataBase = PayDataBase(activity!!)
-            db.usunWydatek(wydatek.id)
+            db.usunWydatek(wydatek.id, wydatek.getKonto().id, wydatek.kwota)
             myDialog.cancel()
             refreshRecyclerView()
         }
@@ -293,10 +305,12 @@ class HomeFragment : Fragment() {
                 try {
                     val db: PayDataBase = PayDataBase(activity!!)
                     val nf = NumberFormat.getInstance()
-                    val saldo = nf.parse(saldoString).toDouble()
+                    var saldo = nf.parse(saldoString).toDouble()
                     val idKonta = konto.id
                     val idKat = kategoia.id
-                    db.dodajWydatek2(title, idKat, day, saldo, idKonta, note, radio)
+                    if(radio == 1)
+                        saldo = saldo * -1
+                    db.dodajWydatek(title, idKat, day, saldo, idKonta, note, radio)
 //                    db.dodajWydatek(title, category, day, saldo, acount,
 
                     mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
@@ -311,6 +325,7 @@ class HomeFragment : Fragment() {
                 mesage = Toast.makeText(activity!!.applicationContext, "Podaj wszystkie dane", Toast.LENGTH_SHORT)
                 mesage.show()
             }
+            refreshRecyclerView()
         }
     }
     private fun kategoiaClicked(partItem : Kategoria) {

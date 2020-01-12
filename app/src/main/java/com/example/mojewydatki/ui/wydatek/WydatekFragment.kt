@@ -84,7 +84,7 @@ class WydatekFragment : Fragment() {
                     val idKonta = db.getIDKonta(acount)!!.id
                     db.dodajKategorie(category)
                     val idKat = db.getIDKat(category)!!.id
-                    db.dodajWydatek2(title, idKat, day, saldo, idKonta, note, radio)
+                    db.dodajWydatek(title, idKat, day, saldo, idKonta, note, radio)
 //                    db.dodajWydatek(title, category, day, saldo, acount,
 
                     //czyszczenie formularza
@@ -97,6 +97,7 @@ class WydatekFragment : Fragment() {
 
                     mesage = Toast.makeText(activity!!.applicationContext, "Pomyślnie dodano", Toast.LENGTH_SHORT)
                     mesage.show()
+
                 }catch (e: Exception) {
                     Log.d("Baza", e.message)
                     mesage = Toast.makeText(activity!!.applicationContext, "Coś poszło nie tak", Toast.LENGTH_SHORT)
