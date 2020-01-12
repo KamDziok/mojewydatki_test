@@ -294,6 +294,37 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         return null
     }
 
+    fun getKategorieAndSuma(): ArrayList<Kategoria>{
+        var list = ArrayList<Kategoria>()
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${WydatekInfo.TABLE_COLUMN_IDKAT} , SUM(${WydatekInfo.TABLE_COLUMN_KWOTA}) FROM  ${WydatekInfo.TABLE_NAME} " +
+                "GROUP BY ${WydatekInfo.TABLE_COLUMN_IDKAT}"
+        try {
+            val cursor = db.rawQuery(selectQuery, null)
+            try { // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        var kategoria = getKategoriaById(cursor.getInt(0))
+                        kategoria!!.setSuma(cursor.getDouble(1))
+                        list.add(kategoria)
+                    } while (cursor.moveToNext())
+                }
+            } finally {
+                try {
+                    cursor.close()
+                } catch (ignore: Exception) {
+                }
+            }
+        } finally {
+            try {
+                db.close()
+            } catch (ignore: Exception) {
+            }
+        }
+
+        return list
+    }
+
     fun getAllKat(): ArrayList<Kategoria>{
         var list = ArrayList<Kategoria>()
         val db = this.writableDatabase

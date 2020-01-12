@@ -15,10 +15,19 @@ import kotlin.math.log
 class Kategoria(id: Int, nazwa: String){
     var id: Int = 0
     var nazwaKat: String = ""
+    private var suma: Double = 0.0
 
     init{
         this.id = id
         this.nazwaKat = nazwa
+    }
+
+    public fun setSuma(suma: Double){
+       this.suma = suma
+    }
+
+    public fun getSuma(): Double{
+        return suma
     }
 }
 
