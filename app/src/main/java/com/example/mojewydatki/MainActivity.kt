@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojewydatki.ui.wydatek.WydatekFragment
@@ -91,6 +92,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
+
+        //Obsluga bazy danych
+        val dbK = PayDataBase (applicationContext)
+        val db = dbK.writableDatabase
+
+        var suma = dbK.getKontaSuma()
+        val sumaKont = this.findViewById<TextView>(R.id.suma_kont)
+        sumaKont.setText(suma.toString())
+
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 

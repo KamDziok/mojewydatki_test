@@ -245,6 +245,19 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         return null
     }
 
+    fun getKontaSuma(): Double{
+        val db = this.writableDatabase
+        val selectQuery = "SELECT SUM(${KontoInfo.TABLE_COLUMN_SALDO})" +
+                " FROM ${KontoInfo.TABLE_NAME}"
+        db.rawQuery(selectQuery, null).use{
+            if (it.moveToFirst()) {
+                var result = it.getDouble(it.getColumnIndex("SUM(${KontoInfo.TABLE_COLUMN_SALDO})"))
+                return result
+            }
+        }
+        return 0.0
+    }
+
     fun dodajKategorie(category: String){
         val db: SQLiteDatabase = getWritableDatabase()
         val row: ContentValues = ContentValues()
