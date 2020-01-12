@@ -379,18 +379,18 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
             try { // looping through all rows and adding to list
                 if (cursor.moveToFirst()) {
                     do {
-                        Log.d("Slecte: ", "nowa iteracja")
-                        Log.d("Select 1: ", cursor.getString(0))
-                        Log.d("Select 2: ", cursor.getDouble(1).toString())
                         var wplywy = getWplywyData(cursor.getString(0))
-                        Log.d("Select 3: ", wplywy.toString())
                         var wydatek = getWydatkiData(cursor.getString(0))
-                        Log.d("Select 4: ", wydatek.toString())
+//                        var maxIdKategorii = getKategoryToPodsumowanie(cursor.getString(0))
+//                        var kategoia = Kategoria(0, "")
+//                        if(maxIdKategorii != 0)
+//                            kategoia = getKategoriaById(maxIdKategorii)!!
                         var podsumowanie = Podsumowanie()
                         podsumowanie.data = cursor.getString(0)
                         podsumowanie.bilans = cursor.getDouble(1)
                         podsumowanie.wplywy = wplywy
                         podsumowanie.wydatki = wydatek
+                        //podsumowanie.kategoria = kategoia!!.nazwaKat
                         lista.add(podsumowanie)
                     } while (cursor.moveToNext())
                 }
@@ -435,6 +435,41 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
             }
         }
         return wydatki
+    }
+
+    fun getKategoryToPodsumowanie(data: String): Int{
+        var kategoria = ""
+        var maxId = 0
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${WydatekInfo.TABLE_COLUMN_IDKAT}, SUM(${WydatekInfo.TABLE_COLUMN_KWOTA}) FROM  ${WydatekInfo.TABLE_NAME} " +
+                "WHERE ${WydatekInfo.TABLE_COLUMN_RODZAJ} = 1 AND ${WydatekInfo.TABLE_COLUMN_DATA} =?"+
+                "GROUP BY ${WydatekInfo.TABLE_COLUMN_IDKAT}"
+        try {
+            val cursor = db.rawQuery(selectQuery, arrayOf(data))
+            Log.d("Select: ", "nowa iteracja")
+            Log.d("Select 1: ", cursor.getInt(0).toString())
+            Log.d("Select 2: ", cursor.getDouble(1).toString())
+            var max = 0.0
+            try { // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        if(max < cursor.getDouble(1))
+                            maxId = cursor.getInt(0)
+                    } while (cursor.moveToNext())
+                }
+            } finally {
+                try {
+                    cursor.close()
+                } catch (ignore: Exception) {
+                }
+            }
+        } finally {
+            try {
+                db.close()
+            } catch (ignore: Exception) {
+            }
+        }
+        return maxId
     }
 
 
