@@ -39,7 +39,7 @@ public class PodsumowanieAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<
         val wydatki = holder.containerView.podsumowanie_wydatki
         val wplywy = holder.containerView.podsumowanie_wplywy
         val bilans = holder.containerView.podsumowanie_bilans
-        val kategoria = holder.containerView.podsumowanie_kategoria_max_wydatki
+
 
         var podsumowanie = listaPodsumowanie.get(position)
 
@@ -47,7 +47,7 @@ public class PodsumowanieAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<
         wydatki.setText(podsumowanie.wydatki.toString())
         wplywy.setText(podsumowanie.wplywy.toString())
         bilans.setText( (podsumowanie.wplywy + podsumowanie.wydatki).toString() )
-        kategoria.setText(podsumowanie.kategoria)
+
     }
 
     public fun setListaPodsumownaie(lista: ArrayList<Podsumowanie>){

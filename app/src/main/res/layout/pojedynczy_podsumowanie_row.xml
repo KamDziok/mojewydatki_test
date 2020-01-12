@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="144dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/nazwa_kategorii_poj"
@@ -93,30 +93,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
             android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/podsumowanie_bilans_view"
             app:layout_constraintTop_toBottomOf="@+id/podsumowanie_wydatki" />
 
-        <TextView
-            android:id="@+id/podsumowanie_najwiecej_wydatkow_w_kategorii"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
-            android:text="@string/podsumowanie_nw"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/podsumowanie_bilans_view" />
-
-        <TextView
-            android:id="@+id/podsumowanie_kategoria_max_wydatki"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="14dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
