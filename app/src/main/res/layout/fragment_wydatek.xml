@@ -198,27 +198,6 @@
             app:layout_constraintStart_toEndOf="@+id/payNotatka_textView"
             app:layout_constraintTop_toBottomOf="@+id/payKonto_textedit" />
 
-        <TextView
-            android:id="@+id/payZdjecie_textView"
-            android:layout_width="77dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="76dp"
-            android:text="@string/dodaj_wydatek_zdjecie"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payNotatka_textView" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="195dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toEndOf="@+id/payZdjecie_textView"
-            app:layout_constraintTop_toBottomOf="@+id/payNotatka_textedit"
-            tools:srcCompat="@tools:sample/backgrounds/scenic[8]" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
