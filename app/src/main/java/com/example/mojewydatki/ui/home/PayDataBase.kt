@@ -4,8 +4,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.mojewydatki.ui.kategorie.Kategoria
 import com.example.mojewydatki.ui.konto_.Konto
+import com.example.mojewydatki.ui.podsumowanie.Podsumowanie
 import com.example.mojewydatki.ui.wydatek.Contact
 
 object WydatekInfo{
@@ -367,9 +369,74 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         return list
     }
 
-    fun creatPodsumowanie(){
-
+    fun creatPodsumowanie(): ArrayList<Podsumowanie>{
+        var lista = ArrayList<Podsumowanie>()
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${WydatekInfo.TABLE_COLUMN_DATA}, SUM(${WydatekInfo.TABLE_COLUMN_KWOTA}) FROM  ${WydatekInfo.TABLE_NAME} " +
+                "GROUP BY ${WydatekInfo.TABLE_COLUMN_DATA}"
+        try {
+            val cursor = db.rawQuery(selectQuery, null)
+            try { // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        Log.d("Slecte: ", "nowa iteracja")
+                        Log.d("Select 1: ", cursor.getString(0))
+                        Log.d("Select 2: ", cursor.getDouble(1).toString())
+                        var wplywy = getWplywyData(cursor.getString(0))
+                        Log.d("Select 3: ", wplywy.toString())
+                        var wydatek = getWydatkiData(cursor.getString(0))
+                        Log.d("Select 4: ", wydatek.toString())
+                        var podsumowanie = Podsumowanie()
+                        podsumowanie.data = cursor.getString(0)
+                        podsumowanie.bilans = cursor.getDouble(1)
+                        podsumowanie.wplywy = wplywy
+                        podsumowanie.wydatki = wydatek
+                        lista.add(podsumowanie)
+                    } while (cursor.moveToNext())
+                }
+            } finally {
+                try {
+                    cursor.close()
+                } catch (ignore: Exception) {
+                }
+            }
+        } finally {
+            try {
+                db.close()
+            } catch (ignore: Exception) {
+            }
+        }
+        return lista
     }
+
+    fun getWplywyData(data: String): Double{
+        var wplywy = 0.0
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${WydatekInfo.TABLE_COLUMN_DATA}, SUM(${WydatekInfo.TABLE_COLUMN_KWOTA}) FROM  ${WydatekInfo.TABLE_NAME} " +
+                "WHERE ${WydatekInfo.TABLE_COLUMN_RODZAJ} = 0 AND ${WydatekInfo.TABLE_COLUMN_DATA} =?"+
+                "GROUP BY ${WydatekInfo.TABLE_COLUMN_DATA}"
+        db.rawQuery(selectQuery, arrayOf(data)).use { // .use requires API 16
+            if (it.moveToFirst()) {
+                wplywy = it.getDouble(it.getColumnIndex("SUM(${WydatekInfo.TABLE_COLUMN_KWOTA})"))
+            }
+        }
+        return wplywy
+    }
+
+    fun getWydatkiData(data: String): Double{
+        var wydatki = 0.0
+        val db = this.writableDatabase
+        val selectQuery = "SELECT ${WydatekInfo.TABLE_COLUMN_DATA}, SUM(${WydatekInfo.TABLE_COLUMN_KWOTA}) FROM  ${WydatekInfo.TABLE_NAME} " +
+                "WHERE ${WydatekInfo.TABLE_COLUMN_RODZAJ} = 1 AND ${WydatekInfo.TABLE_COLUMN_DATA} =?"+
+                "GROUP BY ${WydatekInfo.TABLE_COLUMN_DATA}"
+        db.rawQuery(selectQuery, arrayOf(data)).use { // .use requires API 16
+            if (it.moveToFirst()) {
+                wydatki = it.getDouble(it.getColumnIndex("SUM(${WydatekInfo.TABLE_COLUMN_KWOTA})"))
+            }
+        }
+        return wydatki
+    }
+
 
 //    fun getKatSaldo(idKat: Int): Int {
 //        val db = this.writableDatabase

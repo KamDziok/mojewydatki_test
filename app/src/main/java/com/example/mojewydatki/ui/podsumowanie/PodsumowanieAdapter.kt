@@ -13,12 +13,13 @@ public class Podsumowanie(){
     lateinit var data: String
     var wydatki: Double = 0.0
     var wplywy: Double = 0.0
-    lateinit var kategoria: String
+    var bilans: Double = 0.0
+    var kategoria: String = ""
 }
 
 public class PodsumowanieAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<PodsumowanieAdapter.ViewHolder>(){
 
-    var listaPodsumowanie = ArrayList<Podsumowanie>()
+    private var listaPodsumowanie = ArrayList<Podsumowanie>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,6 +48,10 @@ public class PodsumowanieAdapter(val db: SQLiteDatabase) : RecyclerView.Adapter<
         wplywy.setText(podsumowanie.wplywy.toString())
         bilans.setText( (podsumowanie.wplywy + podsumowanie.wydatki).toString() )
         kategoria.setText(podsumowanie.kategoria)
+    }
+
+    public fun setListaPodsumownaie(lista: ArrayList<Podsumowanie>){
+        this.listaPodsumowanie = lista
     }
 
     inner class ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView),
