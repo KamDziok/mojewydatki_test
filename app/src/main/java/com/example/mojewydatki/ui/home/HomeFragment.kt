@@ -169,9 +169,9 @@ class HomeFragment : Fragment() {
                 radio = 1
             }
 
-            if( !title.equals(wydatek.tytul) && !saldoString.equals(wydatek.kwota.toString()) &&
-                !category.equals(wydatek.getKategoria().nazwaKat) && !day.equals(wydatek.data) &&
-                !acount.equals(wydatek.getKonto().nazwaKonta) && !note.equals(wydatek.notatka) && radio!=wydatek.rodzaj){
+            if( !title.equals(wydatek.tytul) || !saldoString.equals(wydatek.kwota.toString()) ||
+                !category.equals(wydatek.getKategoria().nazwaKat) || !day.equals(wydatek.data) ||
+                !acount.equals(wydatek.getKonto().nazwaKonta) || !note.equals(wydatek.notatka) || radio!=wydatek.rodzaj){
                 try {
                     val db: PayDataBase = PayDataBase(activity!!)
                     val nf = NumberFormat.getInstance()

@@ -367,6 +367,10 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
         return list
     }
 
+    fun creatPodsumowanie(){
+
+    }
+
 //    fun getKatSaldo(idKat: Int): Int {
 //        val db = this.writableDatabase
 //        val selectQuery = "SELECT SUM(Kwota) FROM KATEGORIE WHERE WYDATKI = ?"
@@ -380,118 +384,3 @@ class PayDataBase(context: Context) : SQLiteOpenHelper(context, "WYDATKI", null,
 //        return 0
 //    }
 }
-
-/*
-class AcountDataBase(context: Context) : SQLiteOpenHelper(context, "KONTA", null, 1) {
-
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL (TworzenieTabeliKonta.SQL_CREATE_TABLE)
-    }
-
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL (TworzenieTabeliKonta.SQL_DELETE_TABLE)
-        onCreate(db)
-    }
-
-    fun dodajKonto(acount: String, value: Double){
-        val db: SQLiteDatabase = getWritableDatabase()
-        val row: ContentValues = ContentValues()
-        row.put("Konto", acount)
-        row.put("Kwota", value)
-        db.insertOrThrow("KONTA", null, row)
-    }
-}
-
-class CategoryDataBase(context: Context) : SQLiteOpenHelper(context, "KATEGORIE", null, 1) {
-
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL (TworzenieTabeliKategori.SQL_CREATE_TABLE)
-    }
-
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL (TworzenieTabeliKategori.SQL_DELETE_TABLE)
-        onCreate(db)
-    }
-
-    fun dodajKonto(category: String){
-        val db: SQLiteDatabase = getWritableDatabase()
-        val row: ContentValues = ContentValues()
-        row.put("Kategoria", category)
-        db.insertOrThrow("KATEGORIE", null, row)
-    }
-}
-*/
-/*
-
-object PayDataBase {
-
-    var payTitle = arrayListOf<String>(
-        "Kaufland",
-        "Watkem",
-        "Kaufland",
-        "Watkem",
-        "Kaufland",
-        "Watkem",
-        "Kaufland",
-        "Watkem",
-        "Kaufland",
-        "Watkem",
-        "Kaufland",
-        "Watkem",
-        "Kaufland",
-        "Watkem"
-    )
-
-    var payCategory = arrayListOf<String>(
-        "supermarket",
-        "samochód",
-        "supermarket",
-        "samochód",
-        "supermarket",
-        "samochód",
-        "supermarket",
-        "samochód",
-        "supermarket",
-        "samochód",
-        "supermarket",
-        "samochód",
-        "supermarket",
-        "samochód"
-    )
-
-    var payValue = arrayListOf<Double>(
-        34.29,
-        101.55,
-        34.29,
-        101.55,
-        34.29,
-        101.55,
-        34.29,
-        101.55,
-        34.29,
-        101.55,
-        34.29,
-        101.55,
-        34.29,
-        101.55
-    )
-
-    var payDate = arrayListOf<String>(
-        "03.01.2020",
-        "06.01.2020",
-        "03.01.2020",
-        "06.01.2020",
-        "03.01.2020",
-        "06.01.2020",
-        "03.01.2020",
-        "06.01.2020",
-        "03.01.2020",
-        "06.01.2020",
-        "03.01.2020",
-        "06.01.2020",
-        "03.01.2020",
-        "06.01.2020"
-    )
-}
-
-*/
